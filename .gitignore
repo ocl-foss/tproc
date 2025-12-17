@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+# Emacs
+*~
+
 # Compiled Object files
 *.slo
 *.lo
