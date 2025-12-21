@@ -7,6 +7,6 @@
 #define OCL_TPROC_HPP
 
 #include <ocl/tproc/detail/config.hpp>
-#include <ocl/tproc/rope.hpp>
+#include <ocl/tproc/rope_fwd.hpp>
 
 #endif // OCL_TPROC_HPP

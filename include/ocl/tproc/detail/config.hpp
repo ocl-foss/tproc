@@ -9,12 +9,12 @@
 #define __OCL_TPROC_CONFIG
 
 #include <ocl/detail/config.hpp>
-#include <ocl/is_same.hpp>
+#include <ocl/equiv.hpp>
 #include <ocl/option.hpp>
 #include <ocl/smart_ptr.hpp>
 
 namespace ocl {
-template <typename CharT> class basic_rope;
-}
+namespace pmr {}
+} // namespace ocl
 
 #endif // ifndef __OCL_TPROC_CONFIG
