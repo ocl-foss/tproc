@@ -44,7 +44,14 @@ public:
 private:
   struct impl;
   std::unique_ptr<impl> impl_;
+
+#if !defined(OCL_ROPE_IMPL)
+  struct impl {};
+#endif
 };
+
+
+
 
 #if __cplusplus >= 201811L
 #ifdef __cpp_char8_t
