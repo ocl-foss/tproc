@@ -1,0 +1,14 @@
+# 
+#  File: Jamfile.v2
+#  Author: Amlal El Mahrouss,
+#  Copyright 2025, Amlal El Mahrouss, Licensed under the Boost Software License
+# 
+
+project tests 
+: default-build debug
+;
+
+exe crope.test.o 
+    : crope.test.cpp 
+    : <cxxstd>20 ;
+

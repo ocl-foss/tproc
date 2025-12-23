@@ -14,7 +14,9 @@
 #include <ocl/smart_ptr.hpp>
 
 namespace ocl {
+
 namespace pmr {}
+
 } // namespace ocl
 
 #endif // ifndef __OCL_TPROC_CONFIG

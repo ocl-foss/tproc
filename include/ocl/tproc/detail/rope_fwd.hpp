@@ -7,18 +7,19 @@
 #define OCL_TPROC_ROPE_FWD_HPP
 
 #include <memory>
-#include <string>
+#include <boost/utility/string_view.hpp>
 
 /// \file rope_fwd.hpp
 /// \brief Basic forward definitions of the `rope` type.
 
 namespace ocl {
+
 /// \brief This class implements a rope type for any **CharT** type.
 /// \note Specializations are available as `crope` and `wrope`.
 /// \author Amlal El Mahrouss
 template <class CharT, class Traits = std::char_traits<CharT>,
           class Allocator = std::allocator<CharT>>
-class basic_rope {
+class basic_rope final {
 public:
   using traits_type = Traits;
   using value_type = CharT;
@@ -29,23 +30,20 @@ public:
   using pointer = std::allocator_traits<Allocator>::pointer;
   using const_pointer = std::allocator_traits<Allocator>::pointer;
 
-  [[nodiscard]]
-  CharT *begin() {
-    return nullptr;
-  }
+  CharT *begin();
 
-  [[nodiscard]]
-  CharT *end() {
-    return nullptr;
-  }
+  CharT *end();
 
-  [[nodiscard]]
-  size_type size() {
-    return 0UL;
-  }
+  size_type size();
 
-  basic_rope() = default;
-  virtual ~basic_rope() = default;
+  bool empty() const;
+
+  ~basic_rope() = default;
+  basic_rope(const boost::string_view& in = {});
+
+private:
+  struct impl;
+  std::unique_ptr<impl> impl_;
 };
 
 #if __cplusplus >= 201811L
@@ -56,6 +54,7 @@ using u8rope = basic_rope<char8_t>;
 
 using crope = basic_rope<char>;
 using wrope = basic_rope<wchar_t>;
+
 } // namespace ocl
 
 #endif
