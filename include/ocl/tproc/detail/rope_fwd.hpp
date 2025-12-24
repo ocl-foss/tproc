@@ -51,9 +51,7 @@ private:
 };
 
 #if __cplusplus >= 201811L
-#ifdef __cpp_char8_t
 using u8rope = basic_rope<char8_t>;
-#endif
 #endif
 
 using crope = basic_rope<char>;
