@@ -6,8 +6,8 @@
 #ifndef OCL_TPROC_ROPE_FWD_HPP
 #define OCL_TPROC_ROPE_FWD_HPP
 
-#include <memory>
 #include <boost/utility/string_view.hpp>
+#include <memory>
 
 /// \file rope_fwd.hpp
 /// \brief Basic forward definitions of the `rope` type.
@@ -31,23 +31,16 @@ public:
   using const_pointer = std::allocator_traits<Allocator>::pointer;
 
   CharT *begin();
-
   CharT *end();
-
   size_type size();
-
   bool empty() const;
 
-  ~basic_rope() = default;
-  basic_rope(const boost::string_view& in = {});
+  ~basic_rope();
+  basic_rope(const boost::basic_string_view<CharT> &in = {});
 
 private:
-  struct impl;
-  std::unique_ptr<impl> impl_;
-
-#if !defined(OCL_ROPE_IMPL)
-  struct impl {};
-#endif
+  struct tree_impl;
+  std::unique_ptr<tree_impl> impl_;
 };
 
 #if __cplusplus >= 201811L
@@ -58,5 +51,7 @@ using crope = basic_rope<char>;
 using wrope = basic_rope<wchar_t>;
 
 } // namespace ocl
+
+#include "rope_fwd.inl"
 
 #endif
