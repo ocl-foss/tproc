@@ -8,12 +8,15 @@
 
 namespace ocl {
 
-template <class CharT> struct basic_rope<CharT>::tree_impl {};
+template <class CharT, class Traits, class Allocator>
+struct basic_rope<CharT, Traits, Allocator>::tree_impl {};
 
-template <class CharT> basic_rope<CharT>::~basic_rope() = default;
+template <class CharT, class Traits, class Allocator>
+basic_rope<CharT, Traits, Allocator>::~basic_rope() = default;
 
-template <class CharT>
-basic_rope<CharT>::basic_rope(const boost::basic_string_view<CharT> &in) {}
+template <class CharT, class Traits, class Allocator>
+basic_rope<CharT, Traits, Allocator>::basic_rope(
+    const boost::basic_string_view<CharT> &in) {}
 
 } // namespace ocl
 
