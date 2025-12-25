@@ -1,6 +1,10 @@
 # Prerequisites
 *.d
 
+# build dir
+build/
+bin/
+
 # Emacs
 *~
 

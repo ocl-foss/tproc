@@ -10,7 +10,14 @@
 #define BOOST_TEST_MODULE crope
 #include <boost/test/included/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE(allocator_should_succeed) {
-  auto rope = ocl::crope("foo");
-  BOOST_TEST(rope.empty() == false);
+BOOST_AUTO_TEST_CASE(allocator_should_succeed_in_empty)
+{
+	auto rope = ocl::crope("");
+	BOOST_TEST(rope.empty() == true);
+}
+
+BOOST_AUTO_TEST_CASE(allocator_should_not_succeed_in_empty)
+{
+	auto rope = ocl::crope("foobar");
+	BOOST_TEST(rope.empty() == false);
 }

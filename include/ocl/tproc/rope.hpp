@@ -8,4 +8,15 @@
 
 #include <ocl/tproc/detail/rope_fwd.hpp>
 
+namespace ocl::tproc
+{
+
+	template <typename It, class Pred>
+	It find(It begin, It end, Pred callable);
+
+	template <typename It, class Callable>
+	It find_if(It begin, It end, Callable callable);
+
+} // namespace ocl::tproc
+
 #endif // __OCL_TPROC_ROPE_HPP

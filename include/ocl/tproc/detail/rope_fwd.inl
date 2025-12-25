@@ -6,17 +6,73 @@
 #ifndef OCL_TPROC_ROPE_FWD_INL
 #define OCL_TPROC_ROPE_FWD_INL
 
-namespace ocl {
+namespace ocl
+{
 
-template <class CharT, class Traits, class Allocator>
-struct basic_rope<CharT, Traits, Allocator>::tree_impl {};
+	template <class CharT, class Traits, class Allocator>
+	struct basic_rope<CharT, Traits, Allocator>::tree_impl
+	{
+	};
 
-template <class CharT, class Traits, class Allocator>
-basic_rope<CharT, Traits, Allocator>::~basic_rope() = default;
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::~basic_rope()
+	{
+		delete impl_;
+		impl_ = nullptr;
+	}
 
-template <class CharT, class Traits, class Allocator>
-basic_rope<CharT, Traits, Allocator>::basic_rope(
-    const boost::basic_string_view<CharT> &in) {}
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>&
+	basic_rope<CharT, Traits, Allocator>::operator=(
+		const basic_rope<CharT, Traits, Allocator>&& rope)
+	{
+		delete this->impl_;
+		this->impl_ = rope.impl_;
+		rope.impl_	= nullptr;
+
+		return *this;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::basic_rope(
+		const basic_rope<CharT, Traits, Allocator>&& rope)
+	{
+		delete this->impl_;
+		this->impl_ = rope.impl_;
+		rope.impl_	= nullptr;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::basic_rope(
+		const boost::core::basic_string_view<CharT>& in)
+		: impl_(new tree_impl())
+	{
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	CharT* basic_rope<CharT, Traits, Allocator>::begin()
+	{
+		return nullptr;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	CharT* basic_rope<CharT, Traits, Allocator>::end()
+	{
+		return nullptr;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::size_type
+	basic_rope<CharT, Traits, Allocator>::size()
+	{
+		return 0UL;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	bool basic_rope<CharT, Traits, Allocator>::empty() const
+	{
+		return true;
+	}
 
 } // namespace ocl
 

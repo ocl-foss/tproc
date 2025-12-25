@@ -6,49 +6,53 @@
 #ifndef OCL_TPROC_ROPE_FWD_HPP
 #define OCL_TPROC_ROPE_FWD_HPP
 
-#include <boost/utility/string_view.hpp>
-#include <memory>
+#include <ocl/tproc/detail/config.hpp>
 
 /// \file rope_fwd.hpp
 /// \brief Basic forward definitions of the `rope` type.
 
-namespace ocl {
+namespace ocl
+{
 
-/// \brief This class implements a rope type for any **CharT** type.
-/// \note Specializations are available as `crope` and `wrope`.
-/// \author Amlal El Mahrouss
-template <class CharT, class Traits = std::char_traits<CharT>,
-          class Allocator = std::allocator<CharT>>
-class basic_rope final {
-public:
-  using traits_type = Traits;
-  using value_type = CharT;
-  using allocator_type = Allocator;
-  using size_type = std::allocator_traits<Allocator>::size_type;
-  using reference = CharT &;
-  using const_reference = const CharT &;
-  using pointer = std::allocator_traits<Allocator>::pointer;
-  using const_pointer = std::allocator_traits<Allocator>::pointer;
+	/// \brief This class implements a rope type for any **CharT** type.
+	/// \note Specializations are available as `crope` and `wrope`.
+	/// \author Amlal El Mahrouss
+	template <class CharT, class Traits = std::char_traits<CharT>, class Allocator = std::allocator<CharT>>
+	class basic_rope final
+	{
+	public:
+		using traits_type	  = Traits;
+		using value_type	  = CharT;
+		using allocator_type  = Allocator;
+		using size_type		  = std::allocator_traits<Allocator>::size_type;
+		using reference		  = CharT&;
+		using const_reference = const CharT&;
+		using pointer		  = std::allocator_traits<Allocator>::pointer;
+		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
 
-  CharT *begin();
-  CharT *end();
-  size_type size();
-  bool empty() const;
+		CharT*	  begin();
+		CharT*	  end();
+		size_type size();
+		bool	  empty() const;
 
-  ~basic_rope();
-  basic_rope(const boost::basic_string_view<CharT> &in = {});
+		~basic_rope();
+		basic_rope(const boost::core::basic_string_view<CharT>& in = {});
 
-private:
-  struct tree_impl;
-  std::unique_ptr<tree_impl> impl_;
-};
+		basic_rope& operator=(const basic_rope&& rope);
+		basic_rope(const basic_rope&& rope);
+
+	private:
+		struct tree_impl;
+		tree_impl* impl_{};
+	};
 
 #if __cplusplus >= 201811L
-using u8rope = basic_rope<char8_t>;
+	using u8rope  = basic_rope<char8_t>;
+	using u16rope = basic_rope<char16_t>;
 #endif
 
-using crope = basic_rope<char>;
-using wrope = basic_rope<wchar_t>;
+	using crope = basic_rope<char>;
+	using wrope = basic_rope<wchar_t>;
 
 } // namespace ocl
 

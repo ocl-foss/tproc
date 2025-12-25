@@ -13,9 +13,14 @@
 #include <ocl/option.hpp>
 #include <ocl/smart_ptr.hpp>
 
-namespace ocl {
+#include <boost/core/detail/string_view.hpp>
 
-namespace pmr {}
+namespace ocl
+{
+
+	namespace pmr
+	{
+	}
 
 } // namespace ocl
 
