@@ -24,22 +24,18 @@ namespace ocl
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>&
 	basic_rope<CharT, Traits, Allocator>::operator=(
-		const basic_rope<CharT, Traits, Allocator>&& rope)
+		basic_rope<CharT, Traits, Allocator>&& rope)
 	{
-		delete this->impl_;
-		this->impl_ = rope.impl_;
-		rope.impl_	= nullptr;
-
+		impl_ = std::exchange(other.impl_);
 		return *this;
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::basic_rope(
-		const basic_rope<CharT, Traits, Allocator>&& rope)
+		basic_rope<CharT, Traits, Allocator>&& rope)
 	{
-		delete this->impl_;
-		this->impl_ = rope.impl_;
-		rope.impl_	= nullptr;
+		impl_	   = std::exchange(other.impl_);
+		rope.impl_ = nullptr;
 	}
 
 	template <class CharT, class Traits, class Allocator>
