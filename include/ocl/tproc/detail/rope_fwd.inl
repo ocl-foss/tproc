@@ -13,11 +13,20 @@ namespace ocl::tproc
 	struct basic_rope<CharT, Traits, Allocator>::tree_impl
 	{
 		size_t size_;
-		CharT* head_, tail_;
+		CharT *head_, tail_;
 
-		size_t size() { return size_; }
-		CharT* begin() { return head_; }
-		CharT* end() { return tail_; }
+		size_t size()
+		{
+			return size_;
+		}
+		CharT* begin()
+		{
+			return head_;
+		}
+		CharT* end()
+		{
+			return tail_;
+		}
 	};
 
 	template <class CharT, class Traits, class Allocator>
@@ -76,6 +85,6 @@ namespace ocl::tproc
 		return impl_->size() < 1;
 	}
 
-} // namespace ocl
+} // namespace ocl::tproc
 
 #endif

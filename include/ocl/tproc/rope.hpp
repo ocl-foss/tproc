@@ -10,11 +10,12 @@
 
 namespace ocl::tproc::rope
 {
-    struct reverse_pred;
-    struct fast_pred;
-    struct lowercase_pred;
-    struct exact_pred;
-    struct stars_with_pred;
+
+	struct reverse_pred;
+	struct fast_pred;
+	struct lowercase_pred;
+	struct exact_pred;
+	struct stars_with_pred;
 
 	template <typename It, class Pred>
 	It find(It begin, It end, Pred);
@@ -28,6 +29,6 @@ namespace ocl::tproc::rope
 	template <typename It, class Callable>
 	size_t erase_if(It begin, It end, Callable);
 
-} // namespace ocl::tproc
+} // namespace ocl::tproc::rope
 
 #endif // __OCL_TPROC_ROPE_HPP

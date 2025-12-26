@@ -54,7 +54,7 @@ namespace ocl::tproc
 	using crope = basic_rope<char>;
 	using wrope = basic_rope<wchar_t>;
 
-} // namespace ocl
+} // namespace ocl::tproc
 
 #include "rope_fwd.inl"
 
