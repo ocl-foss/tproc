@@ -30,11 +30,22 @@ namespace ocl::tproc
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
 
-		CharT*	  begin();
-		CharT*	  end();
+		CharT* begin();
+		CharT* end();
+
+		const CharT* cbegin() const;
+		const CharT* cend() const;
+
+		/// \brief Extarcts a needle from a position of n length.
+		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
+
+		/// \brief Rope's version of the find method.
+		size_type find(const boost::core::string_view& needle);
+
 		size_type size();
 		bool	  empty() const;
 
+	public:
 		~basic_rope();
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});
 

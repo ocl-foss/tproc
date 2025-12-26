@@ -50,7 +50,6 @@ namespace ocl::tproc
 		basic_rope<CharT, Traits, Allocator>&& other)
 	{
 		impl_	   = std::exchange(other.impl_);
-		rope.impl_ = nullptr;
 	}
 
 	template <class CharT, class Traits, class Allocator>
