@@ -6,12 +6,18 @@
 #ifndef OCL_TPROC_ROPE_FWD_INL
 #define OCL_TPROC_ROPE_FWD_INL
 
-namespace ocl
+namespace ocl::tproc
 {
 
 	template <class CharT, class Traits, class Allocator>
 	struct basic_rope<CharT, Traits, Allocator>::tree_impl
 	{
+		size_t size_;
+		CharT* head_, tail_;
+
+		size_t size() { return size_; }
+		CharT* begin() { return head_; }
+		CharT* end() { return tail_; }
 	};
 
 	template <class CharT, class Traits, class Allocator>
@@ -24,7 +30,7 @@ namespace ocl
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>&
 	basic_rope<CharT, Traits, Allocator>::operator=(
-		basic_rope<CharT, Traits, Allocator>&& rope)
+		basic_rope<CharT, Traits, Allocator>&& other)
 	{
 		impl_ = std::exchange(other.impl_);
 		return *this;
@@ -32,7 +38,7 @@ namespace ocl
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::basic_rope(
-		basic_rope<CharT, Traits, Allocator>&& rope)
+		basic_rope<CharT, Traits, Allocator>&& other)
 	{
 		impl_	   = std::exchange(other.impl_);
 		rope.impl_ = nullptr;
@@ -48,26 +54,26 @@ namespace ocl
 	template <class CharT, class Traits, class Allocator>
 	CharT* basic_rope<CharT, Traits, Allocator>::begin()
 	{
-		return nullptr;
+		return impl_->begin();
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	CharT* basic_rope<CharT, Traits, Allocator>::end()
 	{
-		return nullptr;
+		return impl_->end();
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::size_type
 	basic_rope<CharT, Traits, Allocator>::size()
 	{
-		return 0UL;
+		return impl_->size();
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	bool basic_rope<CharT, Traits, Allocator>::empty() const
 	{
-		return true;
+		return impl_->size() < 1;
 	}
 
 } // namespace ocl

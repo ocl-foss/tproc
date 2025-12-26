@@ -11,7 +11,7 @@
 /// \file rope_fwd.hpp
 /// \brief Basic forward definitions of the `rope` type.
 
-namespace ocl
+namespace ocl::tproc
 {
 
 	/// \brief This class implements a rope type for any **CharT** type.
