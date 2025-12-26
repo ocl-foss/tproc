@@ -10,6 +10,11 @@
 
 namespace ocl::tproc::rope
 {
+    struct reverse_pred;
+    struct fast_pred;
+    struct lowercase_pred;
+    struct exact_pred;
+    struct stars_with_pred;
 
 	template <typename It, class Pred>
 	It find(It begin, It end, Pred);
