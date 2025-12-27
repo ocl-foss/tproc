@@ -49,6 +49,9 @@ namespace ocl::tproc
 		~basic_rope();
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});
 
+		basic_rope& operator=(const basic_rope& rope);
+		basic_rope(const basic_rope& rope);
+
 		basic_rope& operator=(basic_rope&& rope);
 		basic_rope(basic_rope&& rope);
 

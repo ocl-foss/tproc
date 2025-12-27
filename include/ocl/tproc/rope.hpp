@@ -7,28 +7,98 @@
 #define __OCL_TPROC_ROPE_HPP
 
 #include <ocl/tproc/detail/rope_fwd.hpp>
+#include <string>
 
 namespace ocl::tproc::rope
 {
 
-	struct reverse_pred;
-	struct uppercase_pred;
-	struct lowercase_pred;
-	struct exact_pred;
-	struct starts_with_pred;
+	class reverse_pred
+	{
+		std::string cond_;
+
+	public:
+		reverse_pred(const boost::core::string_view& cond)
+			: cond_(cond)
+		{
+		}
+
+		template <typename It>
+		It operator()(It begin, It end);
+	};
+
+	class uppercase_pred
+	{
+		std::string cond_;
+
+	public:
+		uppercase_pred(const boost::core::string_view& cond)
+			: cond_(cond)
+		{
+		}
+
+		template <typename It>
+		It operator()(It begin, It end);
+	};
+
+	class lowercase_pred
+	{
+		std::string cond_;
+
+	public:
+		lowercase_pred(const boost::core::string_view& cond)
+			: cond_(cond)
+		{
+		}
+
+		template <typename It>
+		It operator()(It begin, It end);
+	};
+
+	class exact_pred
+	{
+		std::string cond_;
+
+	public:
+		exact_pred(const boost::core::string_view& cond)
+			: cond_(cond)
+		{
+		}
+
+		template <typename It>
+		It operator()(It begin, It end);
+	};
+
+	class starts_with_pred
+	{
+		std::string cond_;
+
+	public:
+		starts_with_pred(const boost::core::string_view& cond)
+			: cond_(cond)
+		{
+		}
+
+		template <typename It>
+		It operator()(It begin, It end);
+	};
+
+} // namespace ocl::tproc::rope
+
+namespace ocl::tproc
+{
 
 	template <typename It, class Pred>
 	It find(It begin, It end, Pred);
 
-	template <typename It, class Callable>
-	It find_if(It begin, It end, Callable);
+	template <typename It, class Pred>
+	It find_if(It begin, It end, Pred);
 
 	template <typename It, class Pred>
-	size_t erase(It begin, It end, Pred);
+	It::typename size_type erase(It begin, It end, Pred);
 
-	template <typename It, class Callable>
-	size_t erase_if(It begin, It end, Callable);
+	template <typename It, class Pred>
+	It::typename size_type erase_if(It begin, It end, Pred);
 
-} // namespace ocl::tproc::rope
+} // namespace ocl::tproc
 
 #endif // __OCL_TPROC_ROPE_HPP

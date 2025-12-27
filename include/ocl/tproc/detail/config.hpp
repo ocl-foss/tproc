@@ -12,16 +12,6 @@
 #include <ocl/equiv.hpp>
 #include <ocl/option.hpp>
 #include <ocl/smart_ptr.hpp>
-
 #include <boost/core/detail/string_view.hpp>
-
-namespace ocl
-{
-
-	namespace pmr
-	{
-	}
-
-} // namespace ocl
 
 #endif // ifndef __OCL_TPROC_CONFIG
