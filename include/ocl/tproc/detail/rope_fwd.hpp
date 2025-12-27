@@ -3,8 +3,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 // Official repository: https://github.com/ocl-org/tproc
 
-#ifndef OCL_TPROC_ROPE_FWD_HPP
-#define OCL_TPROC_ROPE_FWD_HPP
+#ifndef __OCL_TPROC_ROPE_FWD_HPP
+#define __OCL_TPROC_ROPE_FWD_HPP
 
 #include <ocl/tproc/detail/config.hpp>
 
@@ -30,17 +30,17 @@ namespace ocl::tproc
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
 
-		CharT* begin();
-		CharT* end();
+		basic_rope<CharT, Traits, Allocator>& begin();
+		basic_rope<CharT, Traits, Allocator>& end();
 
-		const CharT* cbegin() const;
-		const CharT* cend() const;
+		const basic_rope<CharT, Traits, Allocator>& cbegin() const;
+		const basic_rope<CharT, Traits, Allocator>& cend() const;
 
 		/// \brief Extarcts a needle from a position of n length.
 		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
 
 		/// \brief Rope's version of the find method.
-		size_type find(const boost::core::string_view& needle);
+		size_type at(const boost::core::string_view& needle);
 
 		size_type size();
 		bool	  empty() const;
@@ -51,6 +51,9 @@ namespace ocl::tproc
 
 		basic_rope& operator=(basic_rope&& rope);
 		basic_rope(basic_rope&& rope);
+
+	public:
+		static constexpr size_type npos = (size_type)(-1);
 
 	private:
 		struct tree_impl;
