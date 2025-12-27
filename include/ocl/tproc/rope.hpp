@@ -12,7 +12,7 @@ namespace ocl::tproc::rope
 {
 
 	struct reverse_pred;
-	struct fast_pred;
+	struct uppercase_pred;
 	struct lowercase_pred;
 	struct exact_pred;
 	struct starts_with_pred;
