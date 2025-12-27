@@ -10,7 +10,7 @@
 #define BOOST_TEST_MODULE crope_pred
 #include <boost/test/included/unit_test.hpp>
 
-BOOST_AUTO_TEST_CASE(allocator_should_succeed_in_empty_pred)
+BOOST_AUTO_TEST_CASE(rope_should_succeed_in_empty_pred)
 {
 	auto rope = ocl::tproc::crope("");
 	auto it = ocl::tproc::rope::find(rope.cbegin(), rope.cend(), ocl::tproc::rope::exact_pred("foo"));
@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(allocator_should_succeed_in_empty_pred)
 	BOOST_TEST(it == rope.cend());
 }
 
-BOOST_AUTO_TEST_CASE(allocator_should_not_succeed_in_empty_pred)
+BOOST_AUTO_TEST_CASE(rope_should_not_succeed_in_empty_pred)
 {
 	auto rope = ocl::tproc::crope("foobar");
 
