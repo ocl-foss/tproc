@@ -14,7 +14,7 @@ namespace ocl::tproc
 	{
 	private:
 		std::allocator_traits<Allocator>::size_type size_;
-		CharT *head_, tail_{};
+		CharT *head_, *tail_{};
 
 	public:
 		std::allocator_traits<Allocator>::size_type size()
@@ -45,7 +45,7 @@ namespace ocl::tproc
 	basic_rope<CharT, Traits, Allocator>::operator=(
 		basic_rope<CharT, Traits, Allocator>&& other)
 	{
-		impl_ = std::exchange(other.impl_);
+		impl_ = std::exchange(other.impl_, nullptr);
 		return *this;
 	}
 
@@ -53,21 +53,21 @@ namespace ocl::tproc
 	basic_rope<CharT, Traits, Allocator>::basic_rope(
 		basic_rope<CharT, Traits, Allocator>&& other)
 	{
-		impl_ = std::exchange(other.impl_);
+		impl_ = std::exchange(other.impl_, nullptr);
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>& 
 	basic_rope<CharT, Traits, Allocator>::operator=(basic_rope&& other)
 	{
-		impl_ = std::exchange(other.impl_);
+		impl_ = std::exchange(other.impl_, nullptr);
 		return *this;
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::basic_rope(basic_rope&& other)
 	{
-		impl_ = std::exchange(other.impl_);
+		impl_ = std::exchange(other.impl_, nullptr);
 	}
 
 	template <class CharT, class Traits, class Allocator>
