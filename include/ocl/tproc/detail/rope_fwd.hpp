@@ -29,12 +29,17 @@ namespace ocl::tproc
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
+		using iterator_type = basic_rope<CharT, Traits, Allocator>&;
+	  
+		iterator_type rbegin();
+	        iterator_type rend();
+	  
+	        iterator_type begin();
+	        iterator_type end();
 
-		basic_rope<CharT, Traits, Allocator>& begin();
-		basic_rope<CharT, Traits, Allocator>& end();
-
-		const basic_rope<CharT, Traits, Allocator>& cbegin() const;
-		const basic_rope<CharT, Traits, Allocator>& cend() const;
+		/// \todo do we need const_iterator_type now?
+		const iterator_type cbegin() const;
+		const iterator_type cend() const;
 
 		/// \brief Extarcts a needle from a position of n length.
 		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);

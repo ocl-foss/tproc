@@ -12,7 +12,8 @@
 namespace ocl::tproc::rope
 {
 
-	class reverse_pred
+	/// \brief rbegin exact pred type.
+	class reverse_pred final
 	{
 		std::string cond_;
 
@@ -23,10 +24,19 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end);
+		It operator()(It rbegin, It rend)
+		{ 
+			for (auto rbeg{rbegin}; rbegin != rend; ++rbeg)
+			{
+				if (*rbeg == cond_)
+					return rbeg;
+			}
+
+			return rend;
+		}
 	};
 
-	class uppercase_pred
+	class uppercase_pred final
 	{
 		std::string cond_;
 
@@ -37,10 +47,23 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end);
+		It operator()(It begin, It end)
+		{
+			auto cmp = std::transform(cond_.begin(), cond_.end(), [](std::string::char_type& ch) {
+				return std::toupper(ch);
+			});
+
+			for (auto beg{begin}; begin != end; ++beg)
+			{
+				if (*beg == cond_)
+					return beg;
+			}
+
+			return end;
+		}
 	};
 
-	class lowercase_pred
+	class lowercase_pred final
 	{
 		std::string cond_;
 
@@ -51,10 +74,23 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end);
+		It operator()(It begin, It end)
+		{
+			auto cmp = std::transform(cond_.begin(), cond_.end(), [](std::string::char_type& ch) {
+				return std::tolower(ch);
+			});
+
+			for (auto beg{begin}; begin != end; ++beg)
+			{
+				if (*beg == cond_)
+					return beg;
+			}
+
+			return end;
+		}
 	};
 
-	class exact_pred
+	class exact_pred final
 	{
 		std::string cond_;
 
@@ -65,10 +101,19 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end);
+		It operator()(It begin, It end)
+		{ 
+			for (auto beg{begin}; begin != end; ++beg)
+			{
+				if (*beg == cond_)
+					return beg;
+			}
+
+			return end;
+		}
 	};
 
-	class starts_with_pred
+	class starts_with_pred final
 	{
 		std::string cond_;
 
@@ -79,7 +124,7 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end);
+		It operator()(It begin, It end) { return end; }
 	};
 
 } // namespace ocl::tproc::rope

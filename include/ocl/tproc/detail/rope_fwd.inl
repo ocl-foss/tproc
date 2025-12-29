@@ -6,15 +6,20 @@
 #ifndef OCL_TPROC_ROPE_FWD_INL
 #define OCL_TPROC_ROPE_FWD_INL
 
+#include <boost/system/error_code.hpp>
+
 namespace ocl::tproc
 {
 
 	template <class CharT, class Traits, class Allocator>
 	struct basic_rope<CharT, Traits, Allocator>::tree_impl
 	{
+		using char_type = CharT;
+
 	private:
 		std::allocator_traits<Allocator>::size_type size_;
-		CharT *head_, *tail_{};
+		char_type *									head_, *tail_{};
+		boost::system::error_code					ec_{};
 
 	public:
 		std::allocator_traits<Allocator>::size_type size()
@@ -57,7 +62,7 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>& 
+	basic_rope<CharT, Traits, Allocator>&
 	basic_rope<CharT, Traits, Allocator>::operator=(basic_rope&& other)
 	{
 		impl_ = std::exchange(other.impl_, nullptr);

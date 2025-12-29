@@ -8,6 +8,6 @@
 
 #include <ocl/tproc/detail/config.hpp>
 #include <ocl/tproc/rope.hpp>
-//#include <ocl/tproc/regex.hpp>
+// #include <ocl/tproc/regex.hpp>
 
 #endif // __OCL_TPROC_HPP
