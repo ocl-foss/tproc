@@ -133,10 +133,10 @@ namespace ocl::tproc
 {
 
 	template <typename It, class Pred>
-	It find(It begin, It end, Pred);
+	Pred find(It begin, It end, Pred);
 
 	template <typename It, class Pred>
-	It find_if(It begin, It end, Pred);
+	Pred find_if(It begin, It end, Pred);
 
 	template <typename It, class Pred>
 	It::typename size_type erase(It begin, It end, Pred);

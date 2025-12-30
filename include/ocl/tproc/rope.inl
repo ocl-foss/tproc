@@ -10,7 +10,7 @@ namespace ocl::tproc::rope
 {
 
 	template <typename It, class Pred>
-	It find(It begin, It end, Pred pred)
+	Pred find(It begin, It end, Pred pred)
 	{
 		for (auto it = begin; it != end; ++it)
 		{
@@ -24,7 +24,7 @@ namespace ocl::tproc::rope
 	}
 
 	template <typename It, class Pred>
-	It find_if(It begin, It end, Pred pred)
+	Pred find_if(It begin, It end, Pred pred)
 	{
 		for (auto it = begin; it != end; ++it)
 		{
