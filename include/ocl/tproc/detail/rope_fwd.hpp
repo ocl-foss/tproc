@@ -29,13 +29,13 @@ namespace ocl::tproc
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
-		using iterator_type = basic_rope<CharT, Traits, Allocator>&;
-	  
+		using iterator_type	  = basic_rope<CharT, Traits, Allocator>&;
+
 		iterator_type rbegin();
-	        iterator_type rend();
-	  
-	        iterator_type begin();
-	        iterator_type end();
+		iterator_type rend();
+
+		iterator_type begin();
+		iterator_type end();
 
 		/// \todo do we need const_iterator_type now?
 		const iterator_type cbegin() const;

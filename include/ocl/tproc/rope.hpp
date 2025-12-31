@@ -25,7 +25,7 @@ namespace ocl::tproc::rope
 
 		template <typename It>
 		It operator()(It rbegin, It rend)
-		{ 
+		{
 			for (auto rbeg{rbegin}; rbegin != rend; ++rbeg)
 			{
 				if (*rbeg == cond_)
@@ -49,9 +49,11 @@ namespace ocl::tproc::rope
 		template <typename It>
 		It operator()(It begin, It end)
 		{
-			auto cmp = std::transform(cond_.begin(), cond_.end(), [](std::string::char_type& ch) {
-				return std::toupper(ch);
-			});
+			std::transform(cond_.begin(),
+						   cond_.end(),
+						   [](std::string::char_type& ch) {
+							   return std::toupper(ch);
+						   });
 
 			for (auto beg{begin}; begin != end; ++beg)
 			{
@@ -76,9 +78,11 @@ namespace ocl::tproc::rope
 		template <typename It>
 		It operator()(It begin, It end)
 		{
-			auto cmp = std::transform(cond_.begin(), cond_.end(), [](std::string::char_type& ch) {
-				return std::tolower(ch);
-			});
+			std::transform(cond_.begin(),
+						   cond_.end(),
+						   [](std::string::char_type& ch) {
+							   return std::tolower(ch);
+						   });
 
 			for (auto beg{begin}; begin != end; ++beg)
 			{
@@ -102,7 +106,7 @@ namespace ocl::tproc::rope
 
 		template <typename It>
 		It operator()(It begin, It end)
-		{ 
+		{
 			for (auto beg{begin}; begin != end; ++beg)
 			{
 				if (*beg == cond_)
@@ -124,7 +128,10 @@ namespace ocl::tproc::rope
 		}
 
 		template <typename It>
-		It operator()(It begin, It end) { return end; }
+		It operator()(It begin, It end)
+		{
+			return end;
+		}
 	};
 
 } // namespace ocl::tproc::rope
