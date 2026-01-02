@@ -40,7 +40,7 @@ namespace ocl::tproc::rope
 	template <typename It, class Pred>
 	typename Pred::size_type erase(It begin, It end, Pred pred)
 	{
-		It	   original_begin = begin;
+		It						 original_begin = begin;
 		typename Pred::size_type count{};
 
 		for (auto it = begin; it != end;)
@@ -62,7 +62,7 @@ namespace ocl::tproc::rope
 	template <typename It, class Pred>
 	typename It::size_type erase_if(It begin, It end, Pred)
 	{
-		It	   original_begin = begin;
+		It						 original_begin = begin;
 		typename Pred::size_type count{};
 
 		for (auto it = begin; it != end;)

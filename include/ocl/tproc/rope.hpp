@@ -12,10 +12,10 @@ namespace ocl::tproc::rope
 {
 
 	/// \brief reverse exact pred type.
-    template <typename It>
+	template <typename It>
 	class reverse_pred final
 	{
-	    It cond_;
+		It cond_;
 
 	public:
 		reverse_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
@@ -35,7 +35,7 @@ namespace ocl::tproc::rope
 		}
 	};
 
-    template <typename It>
+	template <typename It>
 	class uppercase_pred final
 	{
 		It cond_;
@@ -50,7 +50,7 @@ namespace ocl::tproc::rope
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
-				       [](std::allocator_traits<It>::value_type& ch) {
+						   [](std::allocator_traits<It>::value_type& ch) {
 							   return std::toupper(ch);
 						   });
 
@@ -64,7 +64,7 @@ namespace ocl::tproc::rope
 		}
 	};
 
-    template <typename It>
+	template <typename It>
 	class lowercase_pred final
 	{
 		It cond_;
@@ -79,7 +79,7 @@ namespace ocl::tproc::rope
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
-				       [](std::allocator_traits<ocl::tproc::crope>::value_type& ch) {
+						   [](std::allocator_traits<ocl::tproc::crope>::value_type& ch) {
 							   return std::tolower(ch);
 						   });
 
@@ -93,7 +93,7 @@ namespace ocl::tproc::rope
 		}
 	};
 
-    template <typename It>
+	template <typename It>
 	class exact_pred final
 	{
 		It cond_;
@@ -116,7 +116,7 @@ namespace ocl::tproc::rope
 		}
 	};
 
-    template <typename It>
+	template <typename It>
 	class starts_with_pred final
 	{
 		It cond_;

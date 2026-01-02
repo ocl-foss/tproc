@@ -9,6 +9,12 @@ project tests
 ;
 
 exe crope.test.o 
-    : crope.test.cpp crope.pred.test.cpp
+    : crope.test.cpp
     : <cxxstd>20 ;
+
+
+exe crope.pred.test.o
+    : crope.pred.test.cpp
+    : <cxxstd>20 ;
+
 

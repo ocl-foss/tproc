@@ -56,17 +56,20 @@ namespace ocl::tproc
 		size_type size();
 		bool	  empty() const;
 
+		boost::core::basic_string_view<value_type>		 data();
+		const boost::core::basic_string_view<value_type> c_str();
+
 	public:
 		~basic_rope();
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});
 
-		basic_rope& operator=(const basic_rope& rope);
-		basic_rope(const basic_rope& rope);
+		basic_rope& operator=(const basic_rope& rope) = delete;
+		basic_rope(const basic_rope& rope)			  = delete;
 
 		basic_rope& operator=(basic_rope&& rope);
 		basic_rope(basic_rope&& rope);
 
-	    bool operator!=(const basic_rope& rope);
+		bool operator!=(const basic_rope& rope);
 		bool operator==(const basic_rope& rope);
 
 		bool operator!=(const boost::core::basic_string_view<CharT>&);
