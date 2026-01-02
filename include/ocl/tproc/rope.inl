@@ -16,7 +16,7 @@ namespace ocl::tproc::rope
 		{
 			if (*it == pred)
 			{
-				return it;
+				return *it;
 			}
 		}
 
@@ -28,9 +28,9 @@ namespace ocl::tproc::rope
 	{
 		for (auto it = begin; it != end; ++it)
 		{
-			if (pred(it, pred))
+			if (pred(it))
 			{
-				return it;
+				return *it;
 			}
 		}
 
@@ -38,10 +38,10 @@ namespace ocl::tproc::rope
 	}
 
 	template <typename It, class Pred>
-	It::typename size_type erase(It begin, It end, Pred)
+	typename Pred::size_type erase(It begin, It end, Pred pred)
 	{
 		It	   original_begin = begin;
-		size_t count		  = 0;
+		typename Pred::size_type count{};
 
 		for (auto it = begin; it != end;)
 		{
@@ -60,14 +60,14 @@ namespace ocl::tproc::rope
 	}
 
 	template <typename It, class Pred>
-	It::typename size_type erase_if(It begin, It end, Pred)
+	typename It::size_type erase_if(It begin, It end, Pred)
 	{
 		It	   original_begin = begin;
-		size_t count		  = 0;
+		typename Pred::size_type count{};
 
 		for (auto it = begin; it != end;)
 		{
-			if (pred(it, end) != end)
+			if (pred(it))
 			{
 				it = begin.erase(it);
 				++count;

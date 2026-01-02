@@ -13,5 +13,11 @@
 #include <ocl/option.hpp>
 #include <ocl/smart_ptr.hpp>
 #include <boost/core/detail/string_view.hpp>
+#include <iterator>
+
+namespace ocl::tproc
+{
+
+}
 
 #endif // ifndef __OCL_TPROC_CONFIG

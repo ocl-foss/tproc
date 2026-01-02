@@ -18,8 +18,9 @@ namespace ocl::tproc
 
 	private:
 		std::allocator_traits<Allocator>::size_type size_;
-		char_type *									head_, *tail_{};
+		basic_rope<CharT, Traits, Allocator> *									head_, *tail_{};
 		boost::system::error_code					ec_{};
+        CharT* blob_{};
 
 	public:
 		std::allocator_traits<Allocator>::size_type size()
@@ -27,12 +28,12 @@ namespace ocl::tproc
 			return size_;
 		}
 
-		CharT* begin()
+		basic_rope<CharT, Traits, Allocator> * begin()
 		{
 			return head_;
 		}
 
-		CharT* end()
+		basic_rope<CharT, Traits, Allocator> * end()
 		{
 			return tail_;
 		}
@@ -63,14 +64,14 @@ namespace ocl::tproc
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>&
-	basic_rope<CharT, Traits, Allocator>::operator=(basic_rope&& other)
+	basic_rope<CharT, Traits, Allocator>::operator=(const basic_rope& other)
 	{
 		impl_ = std::exchange(other.impl_, nullptr);
 		return *this;
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>::basic_rope(basic_rope&& other)
+	basic_rope<CharT, Traits, Allocator>::basic_rope(const basic_rope& other)
 	{
 		impl_ = std::exchange(other.impl_, nullptr);
 	}
@@ -83,13 +84,25 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	CharT* basic_rope<CharT, Traits, Allocator>::begin()
+	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::begin()
 	{
 		return impl_->begin();
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	CharT* basic_rope<CharT, Traits, Allocator>::end()
+	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::end()
+	{
+		return impl_->end();
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	const basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::cbegin()
+	{
+		return impl_->begin();
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	const basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::cend()
 	{
 		return impl_->end();
 	}

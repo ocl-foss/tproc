@@ -7,26 +7,25 @@
 #define __OCL_TPROC_ROPE_HPP
 
 #include <ocl/tproc/detail/rope_fwd.hpp>
-#include <string>
 
 namespace ocl::tproc::rope
 {
 
-	/// \brief rbegin exact pred type.
+	/// \brief reverse exact pred type.
+    template <typename It>
 	class reverse_pred final
 	{
-		std::string cond_;
+	    It cond_;
 
 	public:
-		reverse_pred(const boost::core::string_view& cond)
+		reverse_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
 			: cond_(cond)
 		{
 		}
 
-		template <typename It>
-		It operator()(It rbegin, It rend)
+		It* operator()(It* rbegin, It* rend)
 		{
-			for (auto rbeg{rbegin}; rbegin != rend; ++rbeg)
+			for (auto rbeg{rbegin}; rbeg != rend; ++rbeg)
 			{
 				if (*rbeg == cond_)
 					return rbeg;
@@ -36,26 +35,26 @@ namespace ocl::tproc::rope
 		}
 	};
 
+    template <typename It>
 	class uppercase_pred final
 	{
-		std::string cond_;
+		It cond_;
 
 	public:
-		uppercase_pred(const boost::core::string_view& cond)
+		uppercase_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
 			: cond_(cond)
 		{
 		}
 
-		template <typename It>
-		It operator()(It begin, It end)
+		It* operator()(It* begin, It* end)
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
-						   [](std::string::char_type& ch) {
+				       [](std::allocator_traits<It>::value_type& ch) {
 							   return std::toupper(ch);
 						   });
 
-			for (auto beg{begin}; begin != end; ++beg)
+			for (auto beg{begin}; beg != end; ++beg)
 			{
 				if (*beg == cond_)
 					return beg;
@@ -65,26 +64,26 @@ namespace ocl::tproc::rope
 		}
 	};
 
+    template <typename It>
 	class lowercase_pred final
 	{
-		std::string cond_;
+		It cond_;
 
 	public:
-		lowercase_pred(const boost::core::string_view& cond)
+		lowercase_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
 			: cond_(cond)
 		{
 		}
 
-		template <typename It>
-		It operator()(It begin, It end)
+		It* operator()(It* begin, It* end)
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
-						   [](std::string::char_type& ch) {
+				       [](std::allocator_traits<ocl::tproc::crope>::value_type& ch) {
 							   return std::tolower(ch);
 						   });
 
-			for (auto beg{begin}; begin != end; ++beg)
+			for (auto beg{begin}; beg != end; ++beg)
 			{
 				if (*beg == cond_)
 					return beg;
@@ -94,20 +93,20 @@ namespace ocl::tproc::rope
 		}
 	};
 
+    template <typename It>
 	class exact_pred final
 	{
-		std::string cond_;
+		It cond_;
 
 	public:
-		exact_pred(const boost::core::string_view& cond)
+		exact_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
 			: cond_(cond)
 		{
 		}
 
-		template <typename It>
-		It operator()(It begin, It end)
+		It* operator()(It* begin, It* end)
 		{
-			for (auto beg{begin}; begin != end; ++beg)
+			for (auto beg{begin}; beg != end; ++beg)
 			{
 				if (*beg == cond_)
 					return beg;
@@ -117,19 +116,25 @@ namespace ocl::tproc::rope
 		}
 	};
 
+    template <typename It>
 	class starts_with_pred final
 	{
-		std::string cond_;
+		It cond_;
 
 	public:
-		starts_with_pred(const boost::core::string_view& cond)
+		starts_with_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
 			: cond_(cond)
 		{
 		}
 
-		template <typename It>
-		It operator()(It begin, It end)
+		It* operator()(It* begin, It* end)
 		{
+			for (auto beg{begin}; beg != end; ++beg)
+			{
+				if (beg->starts_with(cond_))
+					return beg;
+			}
+
 			return end;
 		}
 	};
@@ -146,10 +151,10 @@ namespace ocl::tproc
 	Pred find_if(It begin, It end, Pred);
 
 	template <typename It, class Pred>
-	It::typename size_type erase(It begin, It end, Pred);
+	Pred::size_type erase(It begin, It end, Pred);
 
 	template <typename It, class Pred>
-	It::typename size_type erase_if(It begin, It end, Pred);
+	Pred::size_type erase_if(It begin, It end, Pred);
 
 } // namespace ocl::tproc
 
