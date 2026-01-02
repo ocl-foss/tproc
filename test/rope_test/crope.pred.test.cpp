@@ -12,8 +12,8 @@
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 {
-	auto rope = ocl::tproc::crope("foo");
-	auto it	  = ocl::tproc::rope::exact_pred<ocl::tproc::crope>{"foo"}(rope.cbegin(), rope.cend());
+	auto rope = ocl::tproc::crope("Exact Sentence");
+	auto it	  = ocl::tproc::rope::exact_pred<ocl::tproc::crope>{"Exact Sentence"}(rope.cbegin(), rope.cend());
 
 	BOOST_TEST(it != rope.cend());
 
@@ -22,12 +22,20 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
 {
-	auto rope = ocl::tproc::crope("foobar");
-
+	auto rope = ocl::tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
 	// find the leaf with the starting value 'foo'
-	auto it = ocl::tproc::rope::starts_with_pred<ocl::tproc::crope>{"foo"}(rope.cbegin(), rope.cend());
+	auto it = ocl::tproc::rope::starts_with_pred<ocl::tproc::crope>{"The Quick"}(rope.cbegin(), rope.cend());
 
 	BOOST_TEST(it != rope.cend());
 
+	auto it_end = ocl::tproc::rope::ends_with_pred<ocl::tproc::crope>{"Lazy Dog"}(rope.cbegin(), rope.cend());
+
+	BOOST_TEST(it_end != rope.cend());
+
+	ocl::io::println(it_end->data());
 	ocl::io::println(it->data());
+
+	auto new_elem = ocl::tproc::crope(", and Jumps again.");
+
+	ocl::io::println(rope.concat(&new_elem)->data());
 }

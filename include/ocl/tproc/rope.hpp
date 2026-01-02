@@ -35,6 +35,30 @@ namespace ocl::tproc::rope
 		}
 	};
 
+	/// \brief ends with pred type.
+	template <typename It>
+	class ends_with_pred final
+	{
+		It cond_;
+
+	public:
+		ends_with_pred(const boost::core::basic_string_view<typename It::value_type>& cond)
+			: cond_(cond)
+		{
+		}
+
+		It* operator()(It* begin, It* end)
+		{
+			for (auto beg{begin}; beg != end; ++beg)
+			{
+				if (beg->ends_with(cond_.data()))
+					return beg;
+			}
+
+			return end;
+		}
+	};
+
 	template <typename It>
 	class uppercase_pred final
 	{

@@ -28,7 +28,7 @@ namespace ocl::tproc
 		using reference		  = CharT&;
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
-		using const_pointer	  = std::allocator_traits<Allocator>::pointer;
+		using const_pointer	  = const std::allocator_traits<Allocator>::pointer;
 		using iterator_type	  = basic_rope<CharT, Traits, Allocator>*;
 
 		iterator_type rbegin();
@@ -74,6 +74,8 @@ namespace ocl::tproc
 
 		bool operator!=(const boost::core::basic_string_view<CharT>&);
 		bool operator==(const boost::core::basic_string_view<CharT>&);
+
+		iterator_type concat(iterator_type right);
 
 	public:
 		static constexpr size_type npos = (size_type)(-1);

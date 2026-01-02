@@ -60,11 +60,11 @@ namespace ocl::tproc
 			{
 				std::allocator_traits<Allocator>::deallocate(alloc_, blob_, capacity_);
 			}
-			
+
 			delete left_;
 			delete right_;
 
-			left_ = nullptr;
+			left_  = nullptr;
 			right_ = nullptr;
 		}
 
@@ -91,6 +91,7 @@ namespace ocl::tproc
 				{
 					throw std::out_of_range("rope index out of range");
 				}
+
 				return blob_[pos];
 			}
 
@@ -109,6 +110,7 @@ namespace ocl::tproc
 			}
 		}
 
+	public:
 		static rope_ptr concat(rope_ptr left, rope_ptr right, Allocator alloc = Allocator())
 		{
 			if (!left)
@@ -116,8 +118,14 @@ namespace ocl::tproc
 			if (!right)
 				return left;
 
-			auto* new_rope	= new basic_rope<CharT, Traits, Allocator>();
-			new_rope->impl_ = new tree_impl(left, right, alloc);
+			auto res = std::basic_string<CharT>(left->data().data(), left->data().size());
+			res += std::basic_string<CharT>(right->data().data(), right->data().size());
+
+			auto* new_rope = new basic_rope<CharT, Traits, Allocator>(res);
+
+			new_rope->impl_->left_	= left;
+			new_rope->impl_->right_ = right;
+
 			return new_rope;
 		}
 
@@ -401,13 +409,14 @@ namespace ocl::tproc
 			return npos;
 
 		size_type rope_size = impl_->size();
+
 		if (needle.size() > rope_size)
 			return npos;
 
-		// Brute force search
 		for (size_type i = 0; i <= rope_size - needle.size(); ++i)
 		{
 			bool match = true;
+
 			for (size_type j = 0; j < needle.size(); ++j)
 			{
 				if (impl_->at(i + j) != needle[j])
@@ -416,9 +425,11 @@ namespace ocl::tproc
 					break;
 				}
 			}
+
 			if (match)
 				return i;
 		}
+
 		return npos;
 	}
 
@@ -524,6 +535,12 @@ namespace ocl::tproc
 	bool basic_rope<CharT, Traits, Allocator>::operator!=(const boost::core::basic_string_view<CharT>& str)
 	{
 		return !(*this == str);
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>* basic_rope<CharT, Traits, Allocator>::concat(basic_rope<CharT, Traits, Allocator>* right)
+	{
+		return impl_->concat(this, right);
 	}
 
 } // namespace ocl::tproc
