@@ -35,7 +35,10 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
 	ocl::io::println(it_end->data());
 	ocl::io::println(it->data());
 
-	auto new_elem = ocl::tproc::crope(", and Jumps again.");
+	auto new_elem = new ocl::tproc::crope(", and Jumps again.");
+	auto ret_elem = rope.concat(new_elem);
 
-	ocl::io::println(rope.concat(&new_elem)->data());
+	ocl::io::println(ret_elem->data());
+
+	delete new_elem;
 }

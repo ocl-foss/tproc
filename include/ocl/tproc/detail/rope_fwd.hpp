@@ -29,17 +29,17 @@ namespace ocl::tproc
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = const std::allocator_traits<Allocator>::pointer;
-		using iterator_type	  = basic_rope<CharT, Traits, Allocator>*;
+		using iterator_ptr	  = basic_rope<CharT, Traits, Allocator>*;
 
-		iterator_type rbegin();
-		iterator_type rend();
+		iterator_ptr rbegin();
+		iterator_ptr rend();
 
-		iterator_type begin();
-		iterator_type end();
+		iterator_ptr begin();
+		iterator_ptr end();
 
-		/// \todo do we need const_iterator_type now?
-		const iterator_type cbegin();
-		const iterator_type cend();
+		/// \todo do we need const_iterator_ptr now?
+		const iterator_ptr cbegin();
+		const iterator_ptr cend();
 
 		/// \brief Extarcts a needle from a position of n length.
 		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
@@ -55,6 +55,10 @@ namespace ocl::tproc
 
 		size_type size();
 		bool	  empty() const;
+
+		iterator_ptr insert(size_type pos,
+							const boost::core::basic_string_view<CharT>&,
+							iterator_ptr) const;
 
 		boost::core::basic_string_view<value_type>		 data();
 		const boost::core::basic_string_view<value_type> c_str();
@@ -75,7 +79,7 @@ namespace ocl::tproc
 		bool operator!=(const boost::core::basic_string_view<CharT>&);
 		bool operator==(const boost::core::basic_string_view<CharT>&);
 
-		iterator_type concat(iterator_type right);
+		iterator_ptr concat(iterator_ptr right);
 
 	public:
 		static constexpr size_type npos = (size_type)(-1);

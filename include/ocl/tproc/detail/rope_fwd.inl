@@ -118,10 +118,10 @@ namespace ocl::tproc
 			if (!right)
 				return left;
 
-			auto res = std::basic_string<CharT>(left->data().data(), left->data().size());
-			res += std::basic_string<CharT>(right->data().data(), right->data().size());
+			auto view_new_text = std::basic_string<CharT>(left->data().data(), left->data().size());
+			view_new_text += std::basic_string<CharT>(right->data().data(), right->data().size());
 
-			auto* new_rope = new basic_rope<CharT, Traits, Allocator>(res);
+			auto* new_rope = new basic_rope<CharT, Traits, Allocator>(view_new_text);
 
 			new_rope->impl_->left_	= left;
 			new_rope->impl_->right_ = right;
@@ -151,19 +151,16 @@ namespace ocl::tproc
 			// Internal node
 			if (pos < weight_)
 			{
-				// Split in left subtree
 				auto [ll, lr] = left_->impl_->split(pos, left_, alloc);
 				return {ll, concat(lr, right_, alloc)};
 			}
 			else if (pos > weight_)
 			{
-				// Split in right subtree
 				auto [rl, rr] = right_->impl_->split(pos - weight_, right_, alloc);
 				return {concat(left_, rl, alloc), rr};
 			}
 			else
 			{
-				// Split exactly at this node
 				return {left_, right_};
 			}
 		}
@@ -281,10 +278,12 @@ namespace ocl::tproc
 			{
 				if (!left_)
 					return false;
+
 				size_type left_check = std::min(weight_ - rope_pos, suffix.size() - suffix_pos);
 
 				if (!left_->impl_->check_suffix(suffix, rope_pos, suffix_pos))
 					return false;
+
 				suffix_pos += left_check;
 
 				if (suffix_pos >= suffix.size())
@@ -299,6 +298,7 @@ namespace ocl::tproc
 
 			if (right_)
 				return right_->impl_->check_suffix(suffix, rope_pos, suffix_pos);
+
 			return suffix_pos >= suffix.size();
 		}
 	};
@@ -334,7 +334,7 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::begin()
+	basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::begin()
 	{
 		if (impl_->is_leaf())
 			return this;
@@ -343,19 +343,19 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::end()
+	basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::end()
 	{
 		return nullptr;
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	const basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::cbegin()
+	const basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::cbegin()
 	{
 		return this->begin();
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	const basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::cend()
+	const basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::cend()
 	{
 		return this->end();
 	}
@@ -374,13 +374,13 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::rbegin()
+	basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::rbegin()
 	{
 		return this->begin();
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	basic_rope<CharT, Traits, Allocator>::iterator_type basic_rope<CharT, Traits, Allocator>::rend()
+	basic_rope<CharT, Traits, Allocator>::iterator_ptr basic_rope<CharT, Traits, Allocator>::rend()
 	{
 		return this->end();
 	}
@@ -390,6 +390,7 @@ namespace ocl::tproc
 	basic_rope<CharT, Traits, Allocator>::substr(size_type pos, const size_type n)
 	{
 		static basic_rope<CharT, Traits, Allocator> empty_rope("");
+
 		if (!impl_)
 			return empty_rope;
 
@@ -439,9 +440,8 @@ namespace ocl::tproc
 		if (!impl_ || !other.impl_)
 			return false;
 
-		// Get the string representation and use the string_view version
-		// This is inefficient but works
 		size_type other_size = other.impl_->size();
+
 		if (other_size > impl_->size())
 			return false;
 
@@ -499,6 +499,7 @@ namespace ocl::tproc
 	{
 		if (!impl_ && !other.impl_)
 			return true;
+
 		if (!impl_ || !other.impl_)
 			return false;
 
@@ -516,6 +517,7 @@ namespace ocl::tproc
 	{
 		if (!impl_)
 			return str.empty();
+
 		return impl_->equals(str);
 	}
 
@@ -543,6 +545,13 @@ namespace ocl::tproc
 		return impl_->concat(this, right);
 	}
 
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>* basic_rope<CharT, Traits, Allocator>::insert(size_type									pos,
+																					   const boost::core::basic_string_view<CharT>& text,
+																					   iterator_ptr									l) const
+	{
+		return impl_->insert(pos, text, l);
+	}
 } // namespace ocl::tproc
 
 #endif
