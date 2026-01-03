@@ -20,6 +20,14 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 	ocl::io::println(it->data());
 }
 
+BOOST_AUTO_TEST_CASE(rope_should_succeed_in_at)
+{
+	auto rope = ocl::tproc::crope("Exact Sentence");
+	auto it	  = std::move(rope.substr(rope.at("Exact"), rope.size()));
+
+	ocl::io::println(it.data());
+}
+
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
 {
 	auto rope = ocl::tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");

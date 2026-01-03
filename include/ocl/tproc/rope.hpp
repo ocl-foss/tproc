@@ -103,7 +103,7 @@ namespace ocl::tproc::rope
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
-						   [](std::allocator_traits<ocl::tproc::crope>::value_type& ch) {
+						   [](std::allocator_traits<It>::value_type& ch) {
 							   return std::tolower(ch);
 						   });
 

@@ -21,22 +21,22 @@ namespace ocl::tproc
 		using error_type	 = boost::system::error_code;
 		using allocator_type = Allocator;
 
+		// B-Tree fields.
 		rope_ptr	   left_{nullptr};	// Left child (internal node only)
 		rope_ptr	   right_{nullptr}; // Right child (internal node only)
 		size_type	   weight_{0};		// Size of left subtree (internal) OR data size (leaf)
 		value_type*	   blob_{nullptr};	// Character data (leaf node only)
 		size_type	   capacity_{0};	// Allocated blob capacity
 		allocator_type alloc_;
-		error_type	   ec_{};
-
-		bool is_leaf() const
-		{
-			return blob_ != nullptr;
-		}
 
 	public:
 		tree_impl(Allocator alloc = Allocator()) : alloc_(alloc)
 		{
+		}
+
+		bool is_leaf() const
+		{
+			return blob_ != nullptr;
 		}
 
 		tree_impl(const boost::core::basic_string_view<CharT>& str, Allocator alloc = Allocator()) : weight_(str.size()), alloc_(alloc), capacity_(str.size())
@@ -136,6 +136,7 @@ namespace ocl::tproc
 				// Split leaf node
 				if (pos == 0)
 					return {nullptr, this_rope};
+
 				if (pos >= weight_)
 					return {this_rope, nullptr};
 
@@ -467,6 +468,7 @@ namespace ocl::tproc
 			return false;
 
 		size_type offset = this_size - other_size;
+
 		for (size_type i = 0; i < other_size; ++i)
 		{
 			if (impl_->at(offset + i) != other.impl_->at(i))
@@ -552,6 +554,7 @@ namespace ocl::tproc
 	{
 		return impl_->insert(pos, text, l);
 	}
+
 } // namespace ocl::tproc
 
 #endif
