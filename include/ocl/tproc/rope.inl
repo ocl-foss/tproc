@@ -59,7 +59,7 @@ namespace ocl::tproc::rope
 	}
 
 	template <typename It, class Pred>
-	typename It::size_type erase_if(It begin, It end, Pred)
+	typename Pred::size_type erase_if(It begin, It end, Pred)
 	{
 		typename Pred::size_type count{};
 
