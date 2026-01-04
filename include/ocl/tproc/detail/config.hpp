@@ -8,16 +8,26 @@
 #ifndef __OCL_TPROC_CONFIG
 #define __OCL_TPROC_CONFIG
 
+#include <boost/assert/source_location.hpp>
 #include <ocl/detail/config.hpp>
 #include <ocl/equiv.hpp>
 #include <ocl/option.hpp>
 #include <ocl/smart_ptr.hpp>
 #include <boost/core/detail/string_view.hpp>
-#include <iterator>
 
 namespace ocl::tproc
 {
 
-}
+	namespace detail
+	{
+
+		inline void throw_invalid_range(const auto sc = BOOST_CURRENT_LOCATION)
+		{
+			throw std::out_of_range(sc.to_string());
+		}
+
+	} // namespace detail
+
+} // namespace ocl::tproc
 
 #endif // ifndef __OCL_TPROC_CONFIG

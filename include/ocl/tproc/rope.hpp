@@ -23,6 +23,8 @@ namespace ocl::tproc::rope
 		{
 		}
 
+		using iterator_ptr = It*;
+
 		It* operator()(It* rbegin, It* rend)
 		{
 			for (auto rbeg{rbegin}; rbeg != rend; ++rbeg)
@@ -47,7 +49,9 @@ namespace ocl::tproc::rope
 		{
 		}
 
-		It* operator()(It* begin, It* end)
+		using iterator_ptr = It*;
+
+		iterator_ptr operator()(iterator_ptr begin, iterator_ptr end)
 		{
 			for (auto beg{begin}; beg != end; ++beg)
 			{
@@ -70,7 +74,9 @@ namespace ocl::tproc::rope
 		{
 		}
 
-		It* operator()(It* begin, It* end)
+		using iterator_ptr = It*;
+
+		iterator_ptr operator()(iterator_ptr begin, iterator_ptr end)
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
@@ -99,7 +105,9 @@ namespace ocl::tproc::rope
 		{
 		}
 
-		It* operator()(It* begin, It* end)
+		using iterator_ptr = It*;
+
+		iterator_ptr operator()(iterator_ptr begin, iterator_ptr end)
 		{
 			std::transform(cond_.begin(),
 						   cond_.end(),
@@ -128,7 +136,9 @@ namespace ocl::tproc::rope
 		{
 		}
 
-		It* operator()(It* begin, It* end)
+		using iterator_ptr = It*;
+
+		iterator_ptr operator()(iterator_ptr begin, iterator_ptr end)
 		{
 			for (auto beg{begin}; beg != end; ++beg)
 			{
@@ -151,7 +161,9 @@ namespace ocl::tproc::rope
 		{
 		}
 
-		It* operator()(It* begin, It* end)
+		using iterator_ptr = It*;
+
+		iterator_ptr operator()(iterator_ptr begin, iterator_ptr end)
 		{
 			for (auto beg{begin}; beg != end; ++beg)
 			{

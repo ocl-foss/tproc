@@ -23,28 +23,27 @@ namespace ocl::tproc
 	public:
 		using traits_type	  = Traits;
 		using value_type	  = CharT;
+		using char_type		  = value_type;
 		using allocator_type  = Allocator;
 		using size_type		  = std::allocator_traits<Allocator>::size_type;
 		using reference		  = CharT&;
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = const std::allocator_traits<Allocator>::pointer;
-		using iterator_ptr	  = basic_rope<CharT, Traits, Allocator>*;
+		using iterator_ptr	  = pointer;
 
-		iterator_ptr rbegin();
-		iterator_ptr rend();
+        iterator_ptr rbegin();
+        iterator_ptr rend();
 
 		iterator_ptr begin();
 		iterator_ptr end();
 
-		/// \todo do we need const_iterator_ptr now?
 		const iterator_ptr cbegin();
 		const iterator_ptr cend();
 
-		/// \brief Extarcts a needle from a position of n length.
-		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
+        iterator_ptr concat(iterator_ptr right);
 
-		/// \brief Rope's version of the find method.
+		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
 		size_type at(const boost::core::basic_string_view<CharT>& needle);
 
 		bool starts_with(const basic_rope<CharT>&);
@@ -64,8 +63,8 @@ namespace ocl::tproc
 		const boost::core::basic_string_view<value_type> c_str();
 
 	public:
-		~basic_rope();
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});
+		~basic_rope();
 
 		basic_rope& operator=(const basic_rope& rope) = delete;
 		basic_rope(const basic_rope& rope)			  = delete;
@@ -78,8 +77,6 @@ namespace ocl::tproc
 
 		bool operator!=(const boost::core::basic_string_view<CharT>&);
 		bool operator==(const boost::core::basic_string_view<CharT>&);
-
-		iterator_ptr concat(iterator_ptr right);
 
 	public:
 		static constexpr size_type npos = (size_type)(-1);
