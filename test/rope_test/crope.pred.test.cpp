@@ -49,4 +49,5 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
 	ocl::io::println(ret_elem->data());
 
 	delete new_elem;
+	delete ret_elem;
 }

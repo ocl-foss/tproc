@@ -12,8 +12,11 @@ int main()
 	auto rope = ocl::tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
 
 	auto new_elem = new ocl::tproc::crope(", and Jumps again.");
-	rope.concat(new_elem);
+	auto res = rope.concat(new_elem);
 
 	ocl::io::println((++rope)->data());
 	ocl::io::println(rope.data());
+
+	delete new_elem;
+	delete res;
 }
