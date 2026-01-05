@@ -10,9 +10,6 @@
 
 #include <boost/assert/source_location.hpp>
 #include <ocl/detail/config.hpp>
-#include <ocl/equiv.hpp>
-#include <ocl/option.hpp>
-#include <ocl/smart_ptr.hpp>
 #include <boost/core/detail/string_view.hpp>
 
 namespace ocl::tproc
