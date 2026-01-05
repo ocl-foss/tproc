@@ -26,6 +26,11 @@ namespace ocl::tproc
 			throw std::out_of_range(sc.to_string());
 		}
 
+		inline void throw_bad_alloc()
+		{
+			throw std::bad_alloc();
+		}
+
 	} // namespace detail
 
 } // namespace ocl::tproc

@@ -30,21 +30,25 @@ namespace ocl::tproc
 		using const_reference = const CharT&;
 		using pointer		  = std::allocator_traits<Allocator>::pointer;
 		using const_pointer	  = const std::allocator_traits<Allocator>::pointer;
-		using iterator_ptr	  = pointer;
+		using rope_ptr		  = basic_rope<CharT>*;
 
-        iterator_ptr rbegin();
-        iterator_ptr rend();
+		rope_ptr rbegin();
+		rope_ptr rend();
 
-		iterator_ptr begin();
-		iterator_ptr end();
+		rope_ptr begin();
+		rope_ptr end();
 
-		const iterator_ptr cbegin();
-		const iterator_ptr cend();
+		pointer	 operator*() const;
+		rope_ptr operator++();
+		rope_ptr operator++(int);
 
-        iterator_ptr concat(iterator_ptr right);
+		const rope_ptr cbegin();
+		const rope_ptr cend();
+
+		rope_ptr concat(rope_ptr right);
 
 		basic_rope<CharT, Traits, Allocator>& substr(size_type pos, const size_type n = 0);
-		size_type at(const boost::core::basic_string_view<CharT>& needle);
+		size_type							  at(const boost::core::basic_string_view<CharT>& needle);
 
 		bool starts_with(const basic_rope<CharT>&);
 		bool ends_with(const basic_rope<CharT>&);
@@ -55,9 +59,9 @@ namespace ocl::tproc
 		size_type size();
 		bool	  empty() const;
 
-		iterator_ptr insert(size_type pos,
-							const boost::core::basic_string_view<CharT>&,
-							iterator_ptr) const;
+		rope_ptr insert(size_type pos,
+						const boost::core::basic_string_view<CharT>&,
+						rope_ptr) const;
 
 		boost::core::basic_string_view<value_type>		 data();
 		const boost::core::basic_string_view<value_type> c_str();
