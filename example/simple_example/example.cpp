@@ -7,16 +7,19 @@
 
 #include <ocl/tproc/rope.hpp>
 
+#ifndef STANDALONE
+using namespace ocl;
+#else
+using namespace boost;
+#endif
+
 int main()
 {
-	auto rope = ocl::tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
+	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
 
-	auto new_elem = new ocl::tproc::crope(", and Jumps again.");
-	auto res = rope.concat(new_elem);
+	std::unique_ptr<tproc::crope> new_elem(new tproc::crope(", and Jumps again."));
+	std::unique_ptr<tproc::crope> res(rope.concat(new_elem.get()));
 
-	ocl::io::println((++rope)->data());
-	ocl::io::println(rope.data());
-
-	delete new_elem;
-	delete res;
+	io::println((++rope)->data());
+	io::println(rope.data());
 }

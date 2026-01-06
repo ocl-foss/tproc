@@ -6,14 +6,21 @@
  */
 
 #include <ocl/tproc/rope.hpp>
+#include <memory>
 
 #define BOOST_TEST_MODULE crope_pred
 #include <boost/test/included/unit_test.hpp>
 
+#ifndef STANDALONE
+using namespace ocl;
+#else
+using namespace boost;
+#endif
+
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 {
-	auto rope = ocl::tproc::crope("Exact Sentence");
-	auto it	  = ocl::tproc::rope::exact_pred<ocl::tproc::crope>{"Exact Sentence"}(rope.cbegin(), rope.cend());
+	auto rope = tproc::crope("Exact Sentence");
+	auto it	  = tproc::rope::exact_pred<tproc::crope>{"Exact Sentence"}(rope.cbegin(), rope.cend());
 
 	BOOST_TEST(it != rope.cend());
 
@@ -22,7 +29,7 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_at)
 {
-	auto rope = ocl::tproc::crope("Exact Sentence");
+	auto rope = tproc::crope("Exact Sentence");
 	auto it	  = std::move(rope.substr(rope.at("Exact"), rope.size()));
 
 	ocl::io::println(it.data());
@@ -30,24 +37,22 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_at)
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
 {
-	auto rope = ocl::tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
+	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
+	
 	// find the leaf with the starting value 'foo'
-	auto it = ocl::tproc::rope::starts_with_pred<ocl::tproc::crope>{"The Quick"}(rope.cbegin(), rope.cend());
+	auto it = tproc::rope::starts_with_pred<tproc::crope>{"The Quick"}(rope.cbegin(), rope.cend());
 
 	BOOST_TEST(it != rope.cend());
 
-	auto it_end = ocl::tproc::rope::ends_with_pred<ocl::tproc::crope>{"Lazy Dog"}(rope.cbegin(), rope.cend());
+	auto it_end = tproc::rope::ends_with_pred<tproc::crope>{"Lazy Dog"}(rope.cbegin(), rope.cend());
 
 	BOOST_TEST(it_end != rope.cend());
 
-	ocl::io::println(it_end->data());
-	ocl::io::println(it->data());
+	io::println(it_end->data());
+	io::println(it->data());
 
-	auto new_elem = new ocl::tproc::crope(", and Jumps again.");
-	auto ret_elem = rope.concat(new_elem);
+	std::unique_ptr<tproc::crope> new_elem(new tproc::crope(", and Jumps again."));
+	std::unique_ptr<tproc::crope> ret_elem(rope.concat(new_elem.get()));
 
-	ocl::io::println(ret_elem->data());
-
-	delete new_elem;
-	delete ret_elem;
+	io::println(ret_elem->data());
 }

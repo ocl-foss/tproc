@@ -25,7 +25,7 @@ namespace ocl::tproc::rope
 
 		using iterator_ptr = It*;
 
-		It* operator()(It* rbegin, It* rend)
+		iterator_ptr operator()(iterator_ptr rbegin, iterator_ptr rend)
 		{
 			for (auto rbeg{rbegin}; rbeg != rend; ++rbeg)
 			{

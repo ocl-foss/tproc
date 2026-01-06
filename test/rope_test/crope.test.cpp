@@ -10,14 +10,20 @@
 #define BOOST_TEST_MODULE crope
 #include <boost/test/included/unit_test.hpp>
 
+#ifndef STANDALONE
+using namespace ocl;
+#else
+using namespace boost;
+#endif
+
 BOOST_AUTO_TEST_CASE(allocator_should_succeed_in_empty)
 {
-	auto rope = ocl::tproc::crope("");
+	auto rope = tproc::crope("");
 	BOOST_TEST(rope.empty() == true);
 }
 
 BOOST_AUTO_TEST_CASE(allocator_should_not_succeed_in_empty)
 {
-	auto rope = ocl::tproc::crope("foobar");
+	auto rope = tproc::crope("foobar");
 	BOOST_TEST(rope.empty() == false);
 }
