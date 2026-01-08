@@ -42,8 +42,8 @@ namespace ocl::tproc
 		rope_ptr operator++();
 		rope_ptr operator++(int);
 
-		const rope_ptr cbegin();
-		const rope_ptr cend();
+		const rope_ptr cbegin() const;
+		const rope_ptr cend() const;
 
 		rope_ptr concat(rope_ptr right);
 
@@ -56,7 +56,7 @@ namespace ocl::tproc
 		bool starts_with(const boost::core::basic_string_view<CharT>&);
 		bool ends_with(const boost::core::basic_string_view<CharT>&);
 
-		size_type size();
+		size_type size() const;
 		bool	  empty() const;
 
 		rope_ptr insert(size_type pos,
@@ -64,7 +64,7 @@ namespace ocl::tproc
 						rope_ptr) const;
 
 		boost::core::basic_string_view<value_type>		 data();
-		const boost::core::basic_string_view<value_type> c_str();
+		const boost::core::basic_string_view<value_type> c_str() const;
 
 	public:
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});

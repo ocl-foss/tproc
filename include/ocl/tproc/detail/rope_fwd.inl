@@ -396,7 +396,7 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	const basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::cbegin()
+	const basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::cbegin() const
 	{
 		if (impl_->is_leaf())
 			return this;
@@ -405,14 +405,14 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	const basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::cend()
+	const basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::cend() const
 	{
 		return nullptr;
 	}
 
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::size_type
-	basic_rope<CharT, Traits, Allocator>::size()
+	basic_rope<CharT, Traits, Allocator>::size() const
 	{
 		return impl_->size();
 	}
@@ -567,7 +567,7 @@ namespace ocl::tproc
 
 	template <class CharT, class Traits, class Allocator>
 	const boost::core::basic_string_view<typename basic_rope<CharT, Traits, Allocator>::value_type>
-	basic_rope<CharT, Traits, Allocator>::c_str()
+	basic_rope<CharT, Traits, Allocator>::c_str() const
 	{
 		return {impl_->blob_, impl_->capacity_};
 	}
@@ -603,7 +603,7 @@ namespace ocl::tproc
 	{
 		return data();
 	}
-	
+
 	template <class CharT, class Traits, class Allocator>
 	basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::operator++()
 	{
