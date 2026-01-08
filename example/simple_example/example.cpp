@@ -6,6 +6,7 @@
  */
 
 #include <ocl/tproc/rope.hpp>
+#include <iostream>
 
 #ifndef STANDALONE
 using namespace ocl;
@@ -20,6 +21,6 @@ int main()
 	std::unique_ptr<tproc::crope> new_elem(new tproc::crope(", and Jumps again."));
 	std::unique_ptr<tproc::crope> res(rope.concat(new_elem.get()));
 
-	io::println((++rope)->data());
-	io::println(rope.data());
+	std::cout << ++rope;
+	std::cout << rope;
 }

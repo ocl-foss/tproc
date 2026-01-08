@@ -194,4 +194,16 @@ namespace ocl::tproc
 
 } // namespace ocl::tproc
 
+inline std::ostream & operator<<(std::ostream& os, ocl::tproc::crope& r){
+    os << r.data();
+    return os;
+}
+
+inline std::wostream & operator<<(std::wostream& os, ocl::tproc::wrope& r){
+    os << r.data();
+    return os;
+}
+
+#include "rope.inl"
+
 #endif // __OCL_TPROC_ROPE_HPP
