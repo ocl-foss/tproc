@@ -28,8 +28,8 @@ namespace ocl::tproc
 
 		size_type	   weight_{0};	   // Size of left subtree (internal) OR data size (leaf)
 		value_type*	   blob_{nullptr}; // Character data (leaf node only)
-		size_type	   capacity_{0};   // Allocated blob capacity
 		allocator_type alloc_;
+		size_type	   capacity_{0};   // Allocated blob capacity
 
 	public:
 		tree_impl(Allocator alloc = Allocator()) : alloc_(alloc)
