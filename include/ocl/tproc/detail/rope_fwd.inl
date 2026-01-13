@@ -617,9 +617,9 @@ namespace ocl::tproc
 	basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::operator++(int n)
 	{
 		rope_ptr ret{};
-		while (n)
+		while (n && ret)
 		{
-			ret = this->operator++();
+			ret = ret->operator++();
 			--n;
 		}
 
@@ -636,9 +636,9 @@ namespace ocl::tproc
 	basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::operator--(int n)
 	{
 		rope_ptr ret{};
-		while (n)
+		while (n && ret)
 		{
-			ret = this->operator--();
+			ret = ret->operator--();
 			--n;
 		}
 
