@@ -39,6 +39,8 @@ namespace ocl::tproc
 		rope_ptr end();
 
 		pointer	 operator*() const;
+		rope_ptr operator--();
+		rope_ptr operator--(int);
 		rope_ptr operator++();
 		rope_ptr operator++(int);
 

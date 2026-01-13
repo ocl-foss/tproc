@@ -29,10 +29,11 @@ namespace ocl::tproc
 		size_type	   weight_{0};	   // Size of left subtree (internal) OR data size (leaf)
 		value_type*	   blob_{nullptr}; // Character data (leaf node only)
 		allocator_type alloc_;
-		size_type	   capacity_{0};   // Allocated blob capacity
+		size_type	   capacity_{0}; // Allocated blob capacity
 
 	public:
-		tree_impl(Allocator alloc = Allocator()) : alloc_(alloc)
+		tree_impl(Allocator alloc = Allocator())
+			: alloc_(alloc)
 		{
 		}
 
@@ -42,7 +43,8 @@ namespace ocl::tproc
 		}
 
 		tree_impl(const boost::core::basic_string_view<CharT>& str,
-				  Allocator									   alloc = Allocator()) : weight_(str.size()), alloc_(alloc), capacity_(str.size())
+				  Allocator									   alloc = Allocator())
+			: weight_(str.size()), alloc_(alloc), capacity_(str.size())
 		{
 			if (weight_ > 0)
 			{
@@ -58,7 +60,8 @@ namespace ocl::tproc
 
 		tree_impl(rope_ptr	left,
 				  rope_ptr	right,
-				  Allocator alloc = Allocator()) : left_(left), right_(right), alloc_(alloc)
+				  Allocator alloc = Allocator())
+			: left_(left), right_(right), alloc_(alloc)
 		{
 			weight_ = left ? left->impl_->total_size() : 0;
 		}
@@ -617,6 +620,25 @@ namespace ocl::tproc
 		while (n)
 		{
 			ret = this->operator++();
+			--n;
+		}
+
+		return ret;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::operator--()
+	{
+		return impl_->left_;
+	}
+
+	template <class CharT, class Traits, class Allocator>
+	basic_rope<CharT, Traits, Allocator>::rope_ptr basic_rope<CharT, Traits, Allocator>::operator--(int n)
+	{
+		rope_ptr ret{};
+		while (n)
+		{
+			ret = this->operator--();
 			--n;
 		}
 
