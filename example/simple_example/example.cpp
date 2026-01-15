@@ -20,8 +20,7 @@ int main()
 	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
 
 	std::unique_ptr<tproc::crope> new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
-	std::unique_ptr<tproc::crope> res(rope.concat(new_elem.get()));
+	rope.concat(new_elem.get());
 
 	std::cout << *++rope << std::endl;
-	std::cout << rope << std::endl;
 }

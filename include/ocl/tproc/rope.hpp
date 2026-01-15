@@ -55,7 +55,7 @@ namespace ocl::tproc::rope
 		{
 			for (auto beg{begin}; beg != end; ++beg)
 			{
-				if (beg->ends_with(cond_.data()))
+				if (beg->ends_with(cond_.to_string()))
 					return beg;
 			}
 
@@ -196,25 +196,25 @@ namespace ocl::tproc
 
 inline std::ostream& operator<<(std::ostream& os, ocl::tproc::crope& r)
 {
-	os << r.data();
+	os << r.to_string();
 	return os;
 }
 
 inline std::wostream& operator<<(std::wostream& os, ocl::tproc::wrope& r)
 {
-	os << r.data();
+	os << r.to_string();
 	return os;
 }
 
 inline std::ostream& operator<<(std::ostream& os, const ocl::tproc::crope& r)
 {
-	os << r.c_str();
+	os << r.to_string();
 	return os;
 }
 
 inline std::wostream& operator<<(std::wostream& os, const ocl::tproc::wrope& r)
 {
-	os << r.c_str();
+	os << r.to_string();
 	return os;
 }
 

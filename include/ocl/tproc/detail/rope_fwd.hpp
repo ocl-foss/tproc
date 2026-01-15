@@ -65,8 +65,8 @@ namespace ocl::tproc
 						const boost::core::basic_string_view<CharT>&,
 						rope_ptr) const;
 
-		boost::core::basic_string_view<value_type>		 data();
-		const boost::core::basic_string_view<value_type> c_str() const;
+		std::basic_string<value_type> to_string();
+		std::basic_string<value_type> to_string() const;
 
 	public:
 		basic_rope(const boost::core::basic_string_view<CharT>& in = {});

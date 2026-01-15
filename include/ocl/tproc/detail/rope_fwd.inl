@@ -26,8 +26,8 @@ namespace ocl::tproc
 		rope_ptr left_{nullptr};  // Left child (internal node only)
 		rope_ptr right_{nullptr}; // Right child (internal node only)
 
-		size_type	   weight_{0};	   // Size of left subtree (internal) OR data size (leaf)
-		value_type*	   blob_{nullptr}; // Character data (leaf node only)
+		size_type	   weight_{0};	   // Size of left subtree (internal) OR to_string size (leaf)
+		value_type*	   blob_{nullptr}; // Character to_string (leaf node only)
 		allocator_type alloc_;
 		size_type	   capacity_{0}; // Allocated blob capacity
 
@@ -117,27 +117,19 @@ namespace ocl::tproc
 		}
 
 	public:
-		rope_ptr concat(rope_ptr  left,
-						rope_ptr  right,
-						Allocator alloc = Allocator())
+		rope_ptr concat(rope_ptr left,
+						rope_ptr right)
 		{
 			if (!left)
 				return right;
+
 			if (!right)
 				return left;
 
-			auto view_new_text = std::basic_string<CharT>(left->data().data(), left->data().size());
-			view_new_text += std::basic_string<CharT>(right->data().data(), right->data().size());
+			right->impl_->left_ = left;
+			left->impl_->right_ = right;
 
-			rope_ptr new_rope = new basic_rope<CharT, Traits, Allocator>(view_new_text);
-
-			if (!new_rope)
-				detail::throw_bad_alloc();
-
-			new_rope->impl_->left_ = left;
-			left->impl_->right_	   = new_rope;
-
-			return new_rope;
+			return left;
 		}
 
 		std::pair<rope_ptr, rope_ptr> split(size_type pos, rope_ptr this_rope, Allocator alloc = Allocator())
@@ -267,9 +259,11 @@ namespace ocl::tproc
 			if (is_leaf())
 			{
 				size_type to_check = std::min(weight_, prefix.size() - checked);
-				if (Traits::compare(blob_, prefix.data() + checked, to_check) != 0)
+
+				if (Traits::compare(blob_, prefix.c_str() + checked, to_check) != 0)
 					return false;
 				checked += to_check;
+
 				return checked >= prefix.size();
 			}
 
@@ -292,7 +286,7 @@ namespace ocl::tproc
 
 				size_type to_check = std::min(weight_ - rope_pos, suffix.size() - suffix_pos);
 
-				if (Traits::compare(blob_ + rope_pos, suffix.data() + suffix_pos, to_check) != 0)
+				if (Traits::compare(blob_ + rope_pos, suffix.to_string() + suffix_pos, to_check) != 0)
 					return false;
 
 				return suffix_pos + to_check >= suffix.size();
@@ -559,20 +553,41 @@ namespace ocl::tproc
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	boost::core::basic_string_view<typename basic_rope<CharT, Traits, Allocator>::value_type>
-	basic_rope<CharT, Traits, Allocator>::data()
+	std::basic_string<typename basic_rope<CharT, Traits, Allocator>::value_type>
+	basic_rope<CharT, Traits, Allocator>::to_string()
 	{
 		if (!impl_)
 			detail::throw_bad_alloc();
 
-		return {impl_->blob_, impl_->capacity_};
+		std::basic_string<typename basic_rope<CharT, Traits, Allocator>::value_type> out{};
+
+		size_t total{};
+
+		for (auto p = impl_; p; p = p->right_ ? p->right_->impl_ : nullptr)
+			total += p->capacity_;
+
+		out.reserve(total);
+
+		auto start = impl_;
+
+		while (start)
+		{
+			out.append(start->blob_, start->capacity_);
+
+			if (start->right_)
+				start = start->right_->impl_;
+			else
+				break;
+		}
+
+		return std::move(out);
 	}
 
 	template <class CharT, class Traits, class Allocator>
-	const boost::core::basic_string_view<typename basic_rope<CharT, Traits, Allocator>::value_type>
-	basic_rope<CharT, Traits, Allocator>::c_str() const
+	std::basic_string<typename basic_rope<CharT, Traits, Allocator>::value_type>
+	basic_rope<CharT, Traits, Allocator>::to_string() const
 	{
-		return {impl_->blob_, impl_->capacity_};
+		return this->to_string();
 	}
 
 	template <class CharT, class Traits, class Allocator>
@@ -604,7 +619,7 @@ namespace ocl::tproc
 
 	basic_rope<CharT, Traits, Allocator>::pointer basic_rope<CharT, Traits, Allocator>::operator*() const
 	{
-		return data();
+		return this->to_string();
 	}
 
 	template <class CharT, class Traits, class Allocator>
