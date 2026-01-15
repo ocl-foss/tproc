@@ -18,8 +18,8 @@ using namespace boost;
 int main()
 {
 	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
-
-	std::unique_ptr<tproc::crope> new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
+	auto new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
+	
 	rope.concat(new_elem.get());
 
 	std::cout << *++rope << std::endl;
