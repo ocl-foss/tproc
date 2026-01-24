@@ -53,7 +53,6 @@ sub process_file {
     my $original = $content;
 
     $content =~ s/\bocl::/boost::/g;
-    $content =~ s/\b__OCL_/BOOST_/g;
     $content =~ s/\bocl\//boost\//g;
     $content =~ s/\bOCL_/BOOST_/g;
 

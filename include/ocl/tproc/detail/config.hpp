@@ -5,8 +5,8 @@
  * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#ifndef __OCL_TPROC_CONFIG
-#define __OCL_TPROC_CONFIG
+#ifndef OCL_TPROC_CONFIG
+#define OCL_TPROC_CONFIG
 
 #include <boost/assert/source_location.hpp>
 #include <ocl/detail/config.hpp>
@@ -32,4 +32,4 @@ namespace ocl::tproc
 
 } // namespace ocl::tproc
 
-#endif // ifndef __OCL_TPROC_CONFIG
+#endif // ifndef OCL_TPROC_CONFIG

@@ -127,5 +127,5 @@ The `basic_rope` class template is the core component:
 
 - Use tabs for indentation (enforced by clang-format)
 - All source files include Boost Software License headers
-- Include guards use `__OCL_TPROC_*` pattern for main headers, `OCL_TPROC_*` for detail headers
+- Include guards use `OCL_TPROC_*` pattern for main headers, `OCL_TPROC_*` for detail headers
 - Namespace: All public API is in `ocl` or `ocl::tproc` namespace

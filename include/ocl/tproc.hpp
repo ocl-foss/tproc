@@ -3,14 +3,14 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 // Official repository: https://github.com/ocl-org/tproc
 
-#ifndef __OCL_TPROC_HPP
-#define __OCL_TPROC_HPP
+#ifndef OCL_TPROC_HPP
+#define OCL_TPROC_HPP
 
 #include <ocl/tproc/detail/config.hpp>
 #include <ocl/tproc/rope.hpp>
 
-#ifdef __OCL_TPROC_REGEX
+#ifdef OCL_TPROC_REGEX
 // #include <ocl/tproc/linter.hpp>
 #endif
 
-#endif // __OCL_TPROC_HPP
+#endif // OCL_TPROC_HPP

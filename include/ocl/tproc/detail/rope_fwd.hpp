@@ -3,8 +3,8 @@
 // file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
 // Official repository: https://github.com/ocl-org/tproc
 
-#ifndef __OCL_TPROC_ROPE_FWD_HPP
-#define __OCL_TPROC_ROPE_FWD_HPP
+#ifndef OCL_TPROC_ROPE_FWD_HPP
+#define OCL_TPROC_ROPE_FWD_HPP
 
 #include <ocl/tproc/detail/config.hpp>
 
