@@ -13,4 +13,7 @@
 // #include <ocl/tproc/linter.hpp>
 #endif
 
+// #include <ocl/tproc/algos/bfs.hpp>
+// #include <ocl/tproc/algos/dijkstra.hpp>
+
 #endif // OCL_TPROC_HPP
