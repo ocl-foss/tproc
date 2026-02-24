@@ -20,4 +20,4 @@ The Freestanding Status is a concept where a module is evaluated on whether it h
 
 - Unverified
 
-##### (c) 2025 Amlal El Mahrouss and OCL Authors, licensed under the Boost Software License.
+##### (c) 2025-2026 Amlal El Mahrouss and OCL Authors, licensed under the Boost Software License.
