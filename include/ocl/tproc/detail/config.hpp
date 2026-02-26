@@ -2,7 +2,7 @@
  * File: config.hpp
  * Purpose: Configuration header of the `tproc` library.
  * Author: Amlal El Mahrouss (amlal@nekernel.org)
- * Copyright 2025, Amlal El Mahrouss, licensed under the Boost Software License.
+ * Copyright 2025-2026, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
 #ifndef OCL_TPROC_CONFIG
