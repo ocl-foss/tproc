@@ -8,4 +8,13 @@
 
 #include <ocl/tproc/detail/config.hpp>
 
+namespace ocl::tproc
+{
+
+
+
+}
+
+#include "bfs.inl"
+
 #endif // OCL_TPROC_BFS_HPP

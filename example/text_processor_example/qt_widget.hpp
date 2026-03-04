@@ -27,6 +27,10 @@ using namespace boost;
 
 #endif
 
+class TTextEditorWidget;
+class TTextEditorWindow;
+class TTextEditorDelegate;
+
 class TTextEditorWidget : public QWidget
 {
     Q_OBJECT
@@ -36,8 +40,10 @@ public:
 	using size_type  = rope_type::size_type;
 	using string_view = std::string_view;
 
-	TTextEditorWidget(string_view text = {})
-		: buffer_(text)
+    TTextEditorWidget() = delete;
+
+	TTextEditorWidget(string_view text, TTextEditorDelegate* del)
+		: buffer_(text), delegate_(del)
 	{
 	}
 
@@ -45,6 +51,7 @@ public:
 
 private:
 	rope_type buffer_;
+    std::weak_ptr<TTextEditorDelegate> delegate_:
 };
 
 #endif
