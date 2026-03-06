@@ -1,6 +1,7 @@
 # OCL.TProc
 
 [![License: BSL](https://img.shields.io/badge/license-BSL-blue.svg)](LICENSE)
+![GitHub Repo stars](https://img.shields.io/github/stars/ocl-foss-org/tproc)
 
 Text Processing set of containers from the OCL.
 
