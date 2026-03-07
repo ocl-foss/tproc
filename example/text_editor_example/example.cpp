@@ -13,6 +13,6 @@ int main(int argc, char** argv)
 	TTextEditor	 win;
 
 	win.show();
-	
+
 	return app.exec();
 }
