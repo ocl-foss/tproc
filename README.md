@@ -3,7 +3,9 @@
 [![License: BSL](https://img.shields.io/badge/license-BSL-blue.svg)](LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/ocl-foss-org/tproc)
 
-Text Processing set of containers from the OCL.
+Like the project? Star us!
+
+Text Processing containers and algorithms from the OCL.
 
 ## Requirements:
 

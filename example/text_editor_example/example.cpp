@@ -5,11 +5,14 @@
  * Copyright 2026, Amlal El Mahrouss, licensed under the Boost Software License.
  */
 
-#include "qt_widget.hpp"
+#include "texteditor.hpp"
 
 int main(int argc, char** argv)
 {
-  QApplication app(argc, argv);
+	QApplication app(argc, argv);
+	TTextEditor	 win;
 
-  return app.exec();
+	win.show();
+
+	return app.exec();
 }

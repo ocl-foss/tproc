@@ -13,7 +13,7 @@
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <QWidget>
+#include <QtWidgets>
 #include <QApplication>
 
 #ifndef STANDALONE
@@ -27,31 +27,28 @@ using namespace boost;
 
 #endif
 
-class TTextEditorWidget;
-class TTextEditorWindow;
-class TTextEditorDelegate;
+class TTextEditor;
 
-class TTextEditorWidget : public QWidget
+class TTextEditor : public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-	using rope_type  = tproc::crope;
-	using size_type  = rope_type::size_type;
+	using rope_type	  = tproc::crope;
+	using size_type	  = rope_type::size_type;
 	using string_view = std::string_view;
 
-    TTextEditorWidget() = delete;
+	TTextEditorWidget() = delete;
 
-	TTextEditorWidget(string_view text, TTextEditorDelegate* del)
+	TTextEditor(string_view text, TTextEditorDelegate* del)
 		: buffer_(text), delegate_(del)
 	{
 	}
 
-    virtual ~TTextEditorWidget() = default;
+	virtual ~TTextEditor() = default;
 
 private:
 	rope_type buffer_;
-    std::weak_ptr<TTextEditorDelegate> delegate_:
 };
 
 #endif
