@@ -11,8 +11,6 @@
 namespace ocl::tproc
 {
 
-
-
 }
 
 #include "bfs.inl"
