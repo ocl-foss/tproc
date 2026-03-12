@@ -33,13 +33,13 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_at)
 	BOOST_ASSERT(rope.to_string() == "Exact Sentence");
 }
 
-BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
+BOOST_AUTO_TEST_CASE(rope_should_succeed_in_concat)
 {
 	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
 	std::unique_ptr<tproc::crope> new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
-	std::unique_ptr<tproc::crope> ret_elem(rope.concat(new_elem.get()));
+	rope.concat(new_elem.get());
 
-	BOOST_TEST((*ret_elem == "The Quick Brown Fox Jumps Over The Lazy Dog, and Jumps again."));
-	BOOST_TEST((rope == ", and Jumps again."));
+	BOOST_TEST((rope.to_string() == "The Quick Brown Fox Jumps Over The Lazy Dog, and Jumps again."));
+	BOOST_TEST((new_elem->to_string() == ", and Jumps again."));
 	std::cout << "Result: " << rope << std::endl;
 }
