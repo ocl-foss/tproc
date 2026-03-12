@@ -17,4 +17,8 @@ exe crope.pred.test.o
     : crope.pred.test.cpp
     : <cxxstd>20 ;
 
+exe crope.pred2.test.o
+    : crope.pred2.test.cpp
+    : <cxxstd>20 ;
+
 
