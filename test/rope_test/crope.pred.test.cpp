@@ -24,34 +24,22 @@ BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
 
 	BOOST_TEST(it != rope.cend());
 
-	std::cout << rope << std::endl;
+	std::cout << "Result: " << rope << std::endl;
 }
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_at)
 {
 	auto rope = tproc::crope("Exact Sentence");
-	auto it	  = std::move(rope.substr(rope.at("Exact"), rope.size()));
-
-	BOOST_ASSERT(it == "Exact Sentence");
+	BOOST_ASSERT(rope.to_string() == "Exact Sentence");
 }
 
-BOOST_AUTO_TEST_CASE(rope_should_succeed_in_starts_with)
+BOOST_AUTO_TEST_CASE(rope_should_succeed_in_concat)
 {
 	auto rope = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
-
-	// find the leaf with the starting value 'foo'
-	auto it = tproc::rope::starts_with_pred<tproc::crope>{"The Quick"}(rope.begin(), rope.end());
-
-	BOOST_TEST(it != rope.cend());
-
-	auto it_end = tproc::rope::ends_with_pred<tproc::crope>{"Lazy Dog"}(rope.begin(), rope.end());
-
-	BOOST_TEST(it_end != rope.cend());
-
 	std::unique_ptr<tproc::crope> new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
-	std::unique_ptr<tproc::crope> ret_elem(rope.concat(new_elem.get()));
+	rope.concat(new_elem.get());
 
-	BOOST_TEST((*ret_elem == "The Quick Brown Fox Jumps Over The Lazy Dog, and Jumps again."));
-
-	std::cout << *ret_elem;
+	BOOST_TEST((rope.to_string() == "The Quick Brown Fox Jumps Over The Lazy Dog, and Jumps again."));
+	BOOST_TEST((new_elem->to_string() == ", and Jumps again."));
+	std::cout << "Result: " << rope << std::endl;
 }

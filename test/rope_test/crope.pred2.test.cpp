@@ -8,7 +8,7 @@
 #include <memory>
 #include <iostream>
 
-#define BOOST_TEST_MODULE crope_pred
+#define BOOST_TEST_MODULE crope_pred2
 #include <boost/test/included/unit_test.hpp>
 
 #ifndef STANDALONE
@@ -17,7 +17,13 @@ using namespace ocl;
 using namespace boost;
 #endif
 
-BOOST_AUTO_TEST_CASE(rope_should_succeed_in_find_pred)
+BOOST_AUTO_TEST_CASE(rope_should_succeed_in_concat)
 {
-  
+  	auto rope = tproc::crope("Exact");
+	auto next_rope = std::make_unique<tproc::crope>(" Sentence");
+    auto rope_2 = rope.concat(next_rope.get());
+
+	std::cout << "Result: " << rope << std::endl;
+
+    BOOST_TEST(rope.to_string() == "Exact Sentence");
 }
