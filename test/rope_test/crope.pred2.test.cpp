@@ -19,11 +19,11 @@ using namespace boost;
 
 BOOST_AUTO_TEST_CASE(rope_should_succeed_in_concat)
 {
-  	auto rope = tproc::crope("Exact");
+	auto rope	   = tproc::crope("Exact");
 	auto next_rope = std::make_unique<tproc::crope>(" Sentence");
-    auto rope_2 = rope.concat(next_rope.get());
+	auto rope_2	   = rope.concat(next_rope.get());
 
 	std::cout << "Result: " << rope << std::endl;
 
-    BOOST_TEST(rope.to_string() == "Exact Sentence");
+	BOOST_TEST(rope.to_string() == "Exact Sentence");
 }
