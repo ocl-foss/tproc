@@ -9,4 +9,40 @@
 
 #include <ocl/tproc/detail/config.hpp>
 
+namespace ocl::tproc
+{
+
+	/// @brief Implementation of dijkstra's algorithm.
+	/// @note Complies with the Vertices type.
+	template <class SourcePair>
+	void dijkstra(SourcePair& pair)
+	{
+		for (auto& v : pair.source.vertices())
+		{
+			pair.dist[v] = BegIt::infinity;
+			pair.prev[v] = BegIt::undefined;
+			pair.q += v;
+			pair.source[v] = {};
+		}
+
+		while (pair.q)
+		{
+			auto u = pair.q.vertex;
+			pair.q.remove(u);
+
+			for (auto& v : pair.graph)
+			{
+				auto& alt = pair.dist[v.u] + pair.graph.distance(v.u, v.v);
+
+				if (alt < pair.dist[v.u])
+				{
+					pair.dist[v.v] = alt;
+					pair.prev[v.v] = u;
+				}
+			}
+		}
+	}
+
+} // namespace ocl::tproc
+
 #endif // OCL_TPROC_DIJKSTRA_HPP
