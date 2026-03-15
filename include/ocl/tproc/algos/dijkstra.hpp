@@ -13,14 +13,14 @@ namespace ocl::tproc
 {
 
 	/// @brief Implementation of dijkstra's algorithm.
-	/// @note Complies with the Vertices type.
+	/// @note Complies with the SourcePair requirement.
 	template <class SourcePair>
 	void dijkstra(SourcePair& pair)
 	{
 		for (auto& v : pair.source.vertices())
 		{
-			pair.dist[v] = BegIt::infinity;
-			pair.prev[v] = BegIt::undefined;
+			pair.dist[v] = SourcePair::infinity;
+			pair.prev[v] = SourcePair::undefined;
 			pair.q += v;
 			pair.source[v] = {};
 		}
