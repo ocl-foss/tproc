@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <string_view>
+
 #include <QtWidgets>
 #include <QApplication>
 
@@ -25,29 +26,5 @@ using namespace boost;
 using namespace boost;
 
 #endif
-
-class TTextEditor;
-
-class TTextEditor : public QMainWindow
-{
-	Q_OBJECT
-
-public:
-	using rope_type	  = tproc::crope;
-	using size_type	  = rope_type::size_type;
-	using string_view = std::string_view;
-
-	TTextEditorWidget() = delete;
-
-	TTextEditor(string_view text, TTextEditorDelegate* del)
-		: buffer_(text), delegate_(del)
-	{
-	}
-
-	virtual ~TTextEditor() = default;
-
-private:
-	rope_type buffer_;
-};
 
 #endif

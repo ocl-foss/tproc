@@ -10,5 +10,6 @@ project tests
 
 exe example.o
     : example.cpp
+    : <cxxflags>$(pkg-config Qt5Gui --cflags --libs) $(pkg-config Qt5Widgets --cflags --libs)
     : <cxxstd>20 ;
 
