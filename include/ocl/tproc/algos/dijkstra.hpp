@@ -27,8 +27,8 @@ namespace ocl::tproc
 
 		while (pair.q)
 		{
-			auto u = pair.q.vertex;
-			pair.q.remove(u);
+			auto vert = pair.q.vertex;
+			pair.q.remove(vert);
 
 			for (auto& v : pair.graph)
 			{
@@ -37,7 +37,7 @@ namespace ocl::tproc
 				if (alt < pair.dist[v.u])
 				{
 					pair.dist[v.v] = alt;
-					pair.prev[v.v] = u;
+					pair.prev[v.v] = vert;
 				}
 			}
 		}
