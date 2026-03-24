@@ -8,7 +8,6 @@
 #include <ocl/asio.hpp>
 #include <iostream>
 #include <memory>
-#include <future>
 
 #ifndef STANDALONE
 using namespace ocl;
