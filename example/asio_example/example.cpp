@@ -10,9 +10,9 @@
 #include <memory>
 
 #ifndef STANDALONE
-using namespace ocl;
+using namespace ::ocl;
 #else
-using namespace boost;
+using namespace ::boost;
 #endif
 
 int main()
