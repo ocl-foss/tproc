@@ -21,14 +21,14 @@ namespace ocl::tproc
 		{
 			pair.dist[v] = SourcePair::infinity;
 			pair.prev[v] = SourcePair::undefined;
-			pair.q += v;
+			pair.result += v;
 			pair.source[v] = {};
 		}
 
-		while (pair.q)
+		while (pair.result)
 		{
-			auto vert = pair.q.vertex;
-			pair.q.remove(vert);
+			auto vert = pair.result.vertex;
+			pair.result.remove(vert);
 
 			for (auto& v : pair.graph)
 			{
