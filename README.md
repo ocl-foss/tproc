@@ -25,11 +25,11 @@ Taken from the example, you can see:
 int main()
 {
 	auto rope	  = tproc::crope("The Quick Brown Fox Jumps Over The Lazy Dog");
-	auto new_elem = std::make_unique<tproc::crope>(", and Jumps again.");
+	auto next_elem = std::make_unique<tproc::crope>(", and Jumps again.");
 
-	rope.concat(new_elem.get());
+	rope.concat(next_elem.get());
 
-	std::cout << *++rope << std::endl;
+	std::cout << *++rope << std::endl; // returns 'next_elem'
 }
 ```
 
