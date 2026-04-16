@@ -9,16 +9,17 @@
 int main(int argc, char** argv)
 {
 	QApplication app(argc, argv);
-	QMainWindow	 mainWindow;
+	QMainWindow	 main_win;
 
 	auto mainWidget = new QWidget;
-	mainWindow.setCentralWidget(mainWidget);
+	main_win.setCentralWidget(mainWidget);
 
-	QBoxLayout * bl = new QBoxLayout(QBoxLayout::TopToBottom, mainWidget);
-	QTextEdit * t = new QTextEdit;
+	QBoxLayout *bl = new QBoxLayout(QBoxLayout::TopToBottom, mainWidget);
+	QTextEdit *t = new QTextEdit;
+	
 	bl->addWidget(t);
 
-	mainWindow.show();
+	main_win.show();
 
 	auto ret = app.exec();
 	QString text = t->toPlainText();
