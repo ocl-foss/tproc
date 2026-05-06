@@ -45,4 +45,6 @@ namespace ocl::tproc
 
 } // namespace ocl::tproc
 
+#include "dijkstra.inl"
+
 #endif // OCL_TPROC_DIJKSTRA_HPP
