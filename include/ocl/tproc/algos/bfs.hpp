@@ -47,7 +47,7 @@ namespace ocl::tproc::bfs
 				continue;
 			}
 
-			if (beg_ == pred(beg_))
+			if (pred(beg_))
 				return beg_;
 
 			prev_beg_ = beg_;
