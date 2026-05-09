@@ -9,10 +9,57 @@
 
 #include <ocl/tproc/detail/config.hpp>
 
-namespace ocl::tproc
+namespace ocl::tproc::bfs
 {
 
-}
+	struct source_iterator;
+
+	/// \brief This data structure contains information about an iterator information.
+	template <typename T>
+	struct source_iterator final
+	{
+		using PredT	  = T* (*)(T*);
+		static T* end = nullptr;
+	};
+
+	template <typename SrcIt>
+	inline SrcIt find(SrcIt beg, typename SrcIt::PredT pred)
+	{
+		if (beg == SrcIt::end)
+			return beg;
+
+		auto beg_	   = beg;
+		auto prev_beg_ = beg_;
+
+		do
+		{
+			if (!prev_beg_)
+				return SrcIt::end;
+
+			if (!beg_)
+			{
+				beg_ = prev_beg_->root;
+				if (!beg_)
+					return SrcIt::end;
+
+				continue;
+			}
+
+			if (beg_ == pred(beg_))
+				return beg_;
+
+			prev_beg_ = beg_;
+
+			if (beg_->left)
+				beg_ = beg_->left;
+			else if (beg->right)
+				beg_ = beg_->right;
+		} while (beg_ && prev_beg_);
+
+		return SrcIt::end;
+	}
+
+} // namespace ocl::tproc::bfs
 
 #include "bfs.inl"
 

@@ -14,19 +14,19 @@ int main(int argc, char** argv)
 	auto mainWidget = new QWidget;
 	main_win.setCentralWidget(mainWidget);
 
-	QBoxLayout *bl = new QBoxLayout(QBoxLayout::TopToBottom, mainWidget);
-	QTextEdit *t = new QTextEdit;
-	
+	QBoxLayout* bl = new QBoxLayout(QBoxLayout::TopToBottom, mainWidget);
+	QTextEdit*	t  = new QTextEdit;
+
 	bl->addWidget(t);
 
 	main_win.show();
 
-	auto ret = app.exec();
+	auto	ret	 = app.exec();
 	QString text = t->toPlainText();
 
-	ocl::tproc::crope *rope = new ::ocl::tproc::crope{{text.toStdString()}};
-	ocl::tproc::crope *rope2 = new ::ocl::tproc::crope{{text.toStdString()}};
-	ocl::tproc::crope *rope3 = new ::ocl::tproc::crope{{text.toStdString()}};
+	ocl::tproc::crope* rope	 = new ::ocl::tproc::crope{{text.toStdString()}};
+	ocl::tproc::crope* rope2 = new ::ocl::tproc::crope{{text.toStdString()}};
+	ocl::tproc::crope* rope3 = new ::ocl::tproc::crope{{text.toStdString()}};
 
 	rope->concat(rope2);
 	rope2->concat(rope3);
