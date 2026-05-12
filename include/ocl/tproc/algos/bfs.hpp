@@ -11,7 +11,7 @@
 
 namespace ocl::tproc::bfs
 {
-
+	template <typename T>
 	struct source_iterator;
 
 	/// \brief This data structure contains information about an iterator.
@@ -19,7 +19,9 @@ namespace ocl::tproc::bfs
 	struct source_iterator final
 	{
 		using PredT	  = T* (*)(T*);
-		static T* end = nullptr;
+        using pointer = T*;
+        /// \brief the end iterator
+		[[maybe_unused]] static pointer end = nullptr;
 	};
 
     /// \requires source_iterator
@@ -30,8 +32,8 @@ namespace ocl::tproc::bfs
 		if (beg == SrcIt::end)
 			return beg;
 
-		auto beg_	   = beg;
-		auto prev_beg_ = beg_;
+		[[maybe_unused]] auto beg_	   = beg;
+		[[maybe_unused]] auto prev_beg_ = beg_;
 
 		do
 		{
