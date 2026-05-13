@@ -18,8 +18,8 @@ namespace ocl::tproc::bfs
 	template <typename T>
 	struct source_iterator final
 	{
-		using PredT	  = T* (*)(T*);
         using pointer = T*;
+		using PredT	  = pointer (*)(pointer);
         /// \brief the end iterator
 		[[maybe_unused]] static pointer end = nullptr;
 	};
@@ -27,7 +27,7 @@ namespace ocl::tproc::bfs
     /// \requires source_iterator
     /// \return SrcIt::T
 	template <typename SrcIt>
-	inline typename SrcIt::T find(typename SrcIt::T beg, typename SrcIt::PredT pred)
+	inline typename SrcIt::T find(typename SrcIt::pointer beg, typename SrcIt::PredT pred)
 	{
 		if (beg == SrcIt::end)
 			return beg;
