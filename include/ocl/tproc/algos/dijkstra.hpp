@@ -17,7 +17,7 @@ namespace ocl::tproc
 	template <class SourcePair>
 	inline void dijkstra(SourcePair& pair)
 	{
-		for (auto& v : pair.source.vertices())
+		for (const auto& v : pair.source.vertices())
 		{
 			pair.dist[v] = SourcePair::infinity;
 			pair.prev[v] = SourcePair::undefined;
@@ -32,7 +32,7 @@ namespace ocl::tproc
 
 			for (auto& v : pair.graph)
 			{
-				auto& alt = pair.dist[v.u] + pair.graph.distance(v.u, v.v);
+				const auto& alt = pair.dist[v.u]; + pair.graph.distance(v.u, v.v);
 
 				if (alt < pair.dist[v.u])
 				{

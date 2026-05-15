@@ -18,33 +18,38 @@ namespace ocl::tproc::bfs
 	template <typename T>
 	struct source_iterator final
 	{
-        using pointer = T*;
+        using type = T;
+		using pointer = T*;
 		using PredT	  = pointer (*)(pointer);
-        /// \brief the end iterator
-		[[maybe_unused]] static pointer end = nullptr;
+		/// \brief the end iterator
+
+		[[maybe_unused]] static pointer end()
+		{
+			return nullptr;
+		}
 	};
 
-    /// \requires source_iterator
-    /// \return SrcIt::T
+	/// \requires source_iterator
+	/// \return SrcIt::T
 	template <typename SrcIt>
-	inline typename SrcIt::T find(typename SrcIt::pointer beg, typename SrcIt::PredT pred)
+	inline typename SrcIt::type find(typename SrcIt::pointer beg, typename SrcIt::PredT pred)
 	{
-		if (beg == SrcIt::end)
+		if (beg == SrcIt::end())
 			return beg;
 
-		[[maybe_unused]] auto beg_	   = beg;
+		[[maybe_unused]] auto beg_		= beg;
 		[[maybe_unused]] auto prev_beg_ = beg_;
 
 		do
 		{
 			if (!prev_beg_)
-				return SrcIt::end;
+				return SrcIt::end();
 
 			if (!beg_)
 			{
 				beg_ = prev_beg_->root;
 				if (!beg_)
-					return SrcIt::end;
+					return SrcIt::end();
 
 				continue;
 			}
@@ -58,9 +63,10 @@ namespace ocl::tproc::bfs
 				beg_ = beg_->left;
 			else if (beg->right)
 				beg_ = beg_->right;
+
 		} while (beg_ && prev_beg_);
 
-		return SrcIt::end;
+		return SrcIt::end();
 	}
 
 } // namespace ocl::tproc::bfs

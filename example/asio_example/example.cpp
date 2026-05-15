@@ -8,6 +8,7 @@
 #include <ocl/asio.hpp>
 #include <iostream>
 #include <memory>
+#include <ocl/tproc/algos/bfs.hpp>
 
 #ifndef STANDALONE
 using namespace ::ocl;
