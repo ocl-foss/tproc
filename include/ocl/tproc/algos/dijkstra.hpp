@@ -32,7 +32,7 @@ namespace ocl::tproc
 
 			for (auto& v : pair.graph)
 			{
-				const auto& alt = pair.dist[v.u]; + pair.graph.distance(v.u, v.v);
+				const auto& alt = pair.dist[v.u] + pair.graph.distance(v.u, v.v);
 
 				if (alt < pair.dist[v.u])
 				{
