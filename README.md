@@ -1,7 +1,7 @@
 # OCL.TProc
 
 [![License: BSL](https://img.shields.io/badge/license-BSL-blue.svg)](LICENSE)
-![GitHub Repo stars](https://img.shields.io/github/stars/ocl-foss/tproc)
+![GitHub Repo Stars](https://img.shields.io/github/stars/open-cpp-libraries/tproc)
 
 Like the project? Star us!
 
