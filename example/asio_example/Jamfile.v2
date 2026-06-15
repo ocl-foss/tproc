@@ -9,6 +9,6 @@ project tests
 ;
 
 exe example.o
-    : example.cpp
+    : example.ex.cpp
     : <cxxstd>20 ;
 
